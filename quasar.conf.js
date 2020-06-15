@@ -53,7 +53,11 @@ module.exports = configure(function (ctx) {
       //            (not treeshaking Quasar; biggest bundle size; convenient)
       all: 'auto',
 
-      components: [],
+      components: [
+        'QCarousel',
+        'QCarouselControl',
+        'QCarouselSlide'
+      ],
       directives: [],
 
       // Quasar plugins

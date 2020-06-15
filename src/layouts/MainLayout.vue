@@ -1,109 +1,103 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
+    <div class="column" style="height:100vh">
+      <div class="col" >
+      </div>
+      <div class="col-8">
+        <q-carousel
+          v-model="slideIndex"
+          ref="carousel"
+          transition-prev="slide-right"
+          transition-next="slide-left"
+          swipeable
+          animated
+          navigation
+          padding
+          height="100%"
+          class="bg-transparent text-black"
         >
-          Essential Links
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
+          <q-carousel-slide :name="startSlide" class="column no-wrap flex-center">
+            <div class="q-mt-md">
+              <start-card></start-card>
+            </div>
+          </q-carousel-slide>
+          <q-carousel-slide v-for="(question,index) of questions" :name="index+1" :key="index" class="column no-wrap flex-center">
+            <div class="q-mt-md text-center">
+              <question-card></question-card>
+            </div>
+          </q-carousel-slide>
 
-    <q-page-container>
-      <router-view />
-    </q-page-container>
+          <template v-slot:control>
+              <q-carousel-control
+              position="left"
+                class="q-gutter-xs flex flex-center"
+              >
+                <q-btn
+                  dense color="deep-orange" text-color="white" icon="arrow_left"
+                  @click="$refs.carousel.previous()"
+                />
+              </q-carousel-control>
+              <q-carousel-control
+                position="right"
+                class="q-gutter-xs  flex flex-center"
+              >
+                <q-btn
+                  dense color="deep-orange" text-color="white" icon="arrow_right"
+                  @click="$refs.carousel.next()"
+                />
+              </q-carousel-control>
+              <q-carousel-control
+                position="top"
+              >
+                <q-slider
+                  v-model="slideIndex"
+                  markers
+                  :min="0"
+                  :max="questionsCount"
+                  color="deep-orange"
+                />
+              </q-carousel-control>
+          </template>
+        </q-carousel>
+      </div>
+      <div class="col">
+      </div>
+    </div>
   </q-layout>
 </template>
 
-<script>
-import EssentialLink from 'components/EssentialLink'
+<script lang="ts">
+import Vue from 'vue'
+import { State, Action, Getter } from 'vuex-class'
+import { Question } from 'Models/Question/Question'
+import { Component } from 'vue-property-decorator'
+import { ProfileState } from 'Models/types'
+import QuestionCard from 'components/QuestionCard.vue'
+import StartCard from 'components/StartCard.vue'
 
-export default {
-  name: 'MainLayout',
+Vue.component('question-card', QuestionCard)
+Vue.component('start-card', StartCard)
+const namespace = 'profile'
+@Component
+export default class MainLayout extends Vue {
+  @State('profile')
+  profile: ProfileState;
 
-  components: {
-    EssentialLink
-  },
+  @Action('fetchData', { namespace })
+  fetchData: any;
 
-  data () {
-    return {
-      leftDrawerOpen: false,
-      essentialLinks: [
-        {
-          title: 'Docs',
-          caption: 'quasar.dev',
-          icon: 'school',
-          link: 'https://quasar.dev'
-        },
-        {
-          title: 'Github',
-          caption: 'github.com/quasarframework',
-          icon: 'code',
-          link: 'https://github.com/quasarframework'
-        },
-        {
-          title: 'Discord Chat Channel',
-          caption: 'chat.quasar.dev',
-          icon: 'chat',
-          link: 'https://chat.quasar.dev'
-        },
-        {
-          title: 'Forum',
-          caption: 'forum.quasar.dev',
-          icon: 'record_voice_over',
-          link: 'https://forum.quasar.dev'
-        },
-        {
-          title: 'Twitter',
-          caption: '@quasarframework',
-          icon: 'rss_feed',
-          link: 'https://twitter.quasar.dev'
-        },
-        {
-          title: 'Facebook',
-          caption: '@QuasarFramework',
-          icon: 'public',
-          link: 'https://facebook.quasar.dev'
-        },
-        {
-          title: 'Quasar Awesome',
-          caption: 'Community Quasar projects',
-          icon: 'favorite',
-          link: 'https://awesome.quasar.dev'
-        }
-      ]
-    }
+  @Getter('questions', { namespace })
+  questions: Array<Question>;
+
+  @Getter('questionsCount', { namespace })
+  questionsCount: number;
+
+  startSlide = 0;
+
+  slideIndex = 0;
+
+  mounted () {
+    this.fetchData()
   }
 }
 </script>
