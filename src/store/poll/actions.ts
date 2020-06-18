@@ -21,5 +21,9 @@ export const actions: ActionTree<ProfileState, RootState> = {
     }, (error) => {
       console.log(error)
     })
+  },
+
+  addAnswer ({ commit }, answer: Record<string, string>) {
+    commit('addAnswer', answer)
   }
 }

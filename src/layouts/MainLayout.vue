@@ -22,8 +22,14 @@
             </div>
           </q-carousel-slide>
           <q-carousel-slide v-for="(question,index) of questions" :name="index+1" :key="index" class="column no-wrap flex-center">
-            <div class="q-mt-md text-center">
+            <div class="q-mt-md text-center" style="min-width:50%">
               <question-card :question="question"></question-card>
+            </div>
+          </q-carousel-slide>
+
+          <q-carousel-slide :name="questionsCount+1" class="column no-wrap flex-center">
+            <div class="q-mt-md">
+              <q-btn @click="handleEnd">End</q-btn>
             </div>
           </q-carousel-slide>
 
@@ -53,7 +59,7 @@
                   v-model="slideIndex"
                   markers
                   :min="0"
-                  :max="questionsCount"
+                  :max="questionsCount+1"
                   color="deep-orange"
                 />
               </q-carousel-control>
@@ -68,10 +74,9 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { State, Action, Getter } from 'vuex-class'
+import { Action, Getter } from 'vuex-class'
 import { Question } from 'Models/Question/Question'
 import { Component } from 'vue-property-decorator'
-import { ProfileState } from 'Models/types'
 import QuestionCard from 'components/QuestionCard.vue'
 import StartCard from 'components/StartCard.vue'
 
@@ -80,9 +85,6 @@ Vue.component('start-card', StartCard)
 const namespace = 'profile'
 @Component
 export default class MainLayout extends Vue {
-  @State('profile')
-  profile: ProfileState;
-
   @Action('fetchData', { namespace })
   fetchData: any;
 
@@ -92,12 +94,19 @@ export default class MainLayout extends Vue {
   @Getter('questionsCount', { namespace })
   questionsCount: number;
 
+  @Getter('answers', { namespace })
+  answers: Record<string, string>;
+
   startSlide = 0;
 
   slideIndex = 0;
 
   mounted () {
     this.fetchData()
+  }
+
+  handleEnd () {
+    console.log(this.answers)
   }
 }
 </script>

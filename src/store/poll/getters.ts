@@ -9,5 +9,8 @@ export const getters: GetterTree<ProfileState, RootState> = {
   },
   questionsCount (state): number {
     return state.questions?.length || 0
+  },
+  answers (state): Record<string, string> {
+    return state.answers
   }
 }

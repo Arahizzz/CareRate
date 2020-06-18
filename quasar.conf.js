@@ -57,7 +57,8 @@ module.exports = configure(function (ctx) {
       components: [
         'QCarousel',
         'QCarouselControl',
-        'QCarouselSlide'
+        'QCarouselSlide',
+        'QInput'
       ],
       directives: [],
 

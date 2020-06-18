@@ -5,7 +5,8 @@ import { mutations } from './mutations'
 import { ProfileState, RootState } from 'Models/types'
 
 export const state: ProfileState = {
-  questions: undefined
+  questions: undefined,
+  answers: {}
 }
 
 const namespaced = true

@@ -1,5 +1,6 @@
 import { ProfileState } from 'Models/types'
 const state: ProfileState = {
-  questions: []
+  questions: [],
+  answers: {}
 }
 export default state
