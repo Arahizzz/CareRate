@@ -23,7 +23,7 @@
           </q-carousel-slide>
           <q-carousel-slide v-for="(question,index) of questions" :name="index+1" :key="index" class="column no-wrap flex-center">
             <div class="q-mt-md text-center">
-              <question-card></question-card>
+              <question-card :question="question"></question-card>
             </div>
           </q-carousel-slide>
 
@@ -97,9 +97,7 @@ export default class MainLayout extends Vue {
   slideIndex = 0;
 
   mounted () {
-    console.log("lol")
     this.fetchData()
-    console.log("kek")
   }
 }
 </script>
