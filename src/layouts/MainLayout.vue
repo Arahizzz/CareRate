@@ -97,7 +97,9 @@ export default class MainLayout extends Vue {
   slideIndex = 0;
 
   mounted () {
+    console.log("lol")
     this.fetchData()
+    console.log("kek")
   }
 }
 </script>
