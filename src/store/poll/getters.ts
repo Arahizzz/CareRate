@@ -2,6 +2,7 @@
 import { RootState, ProfileState } from 'Models/types'
 import { GetterTree } from 'vuex'
 import { TranslatedQuestion } from 'app/Models/Question/TranslatedQuestion'
+import { state } from './profile'
 
 export const getters: GetterTree<ProfileState, RootState> = {
   questions (state): TranslatedQuestion[] | undefined {
@@ -13,6 +14,9 @@ export const getters: GetterTree<ProfileState, RootState> = {
   },
   answers (state): Record<string, string> {
     return state.answers
+  },
+  answerById (state): any {
+    return (id: string) => state.answers[id]
   },
   language (state): string {
     return state.language

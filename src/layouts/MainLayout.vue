@@ -23,8 +23,7 @@
           </q-carousel-slide>
           <q-carousel-slide v-for="(question,index) of questions" :name="index+1" :key="index" class="column no-wrap flex-center">
             <div class="q-mt-md text-center" style="min-width:50%">
-              <p>{{question.title}}</p>
-              <question-card :question="question"></question-card>
+              <question-card ref="currentQuestion" :question="question" @answered="$refs.carousel.next()"></question-card>
             </div>
           </q-carousel-slide>
 
@@ -40,7 +39,7 @@
                 class="q-gutter-xs flex flex-center"
               >
                 <q-btn
-                  dense color="deep-orange" text-color="white" icon="arrow_left"
+                  dense color="deep-orange" text-color="white" icon="arrow_left" size="xl"
                   @click="$refs.carousel.previous()"
                 />
               </q-carousel-control>
@@ -49,7 +48,7 @@
                 class="q-gutter-xs  flex flex-center"
               >
                 <q-btn
-                  dense color="deep-orange" text-color="white" icon="arrow_right"
+                  dense color="deep-orange" text-color="white" icon="arrow_right" size="xl"
                   @click="$refs.carousel.next()"
                 />
               </q-carousel-control>
@@ -76,7 +75,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Action, Getter } from 'vuex-class'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component, Prop, Watch } from 'vue-property-decorator'
 import QuestionCard from 'components/QuestionCard.vue'
 import StartCard from 'components/StartCard.vue'
 import { TranslatedQuestion } from '../../Models/Question/TranslatedQuestion'
@@ -99,11 +98,18 @@ export default class MainLayout extends Vue {
   questionsCount!: number;
 
   @Getter('answers', { namespace })
-  answers!: Record<string, string>;
+  answers!: {};
 
   startSlide = 0;
 
   slideIndex = 0;
+
+  @Watch('slideIndex')
+  carouselNext () {
+    try {
+      this.$refs.currentQuestion[0].saveAnswer()
+    } catch (error) {}
+  }
 
   mounted () {
     this.fetchData(this.surveyId)

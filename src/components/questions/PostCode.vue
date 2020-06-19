@@ -14,12 +14,21 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { Action } from 'vuex-class'
+const namespace = 'profile'
 @Component
 export default class FreeText extends Vue {
   @Prop({ default: '' })
-  questionId!: string
+  id!: string
+
+  fontSizePx = 50;
+  @Getter('answerById', { namespace })
+  answerGetter: any;
 
   answer = '';
-  fontSizePx = 50;
+
+  mounted () {
+    this.answer = this.answerGetter(this.id)?.answer
+  }
 }
 </script>
