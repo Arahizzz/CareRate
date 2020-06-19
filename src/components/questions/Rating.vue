@@ -7,9 +7,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
+import { Getter } from 'vuex-class'
+const namespace = 'profile'
 @Component
 export default class Rating extends Vue {
   @Prop({ default: '' })
-  questionId!: string
+  id!: string
+
+  @Getter('answerById', { namespace })
+  answerGetter: any;
+
+  answer = '';
+
+  mounted () {
+    this.answer = this.answerGetter(this.id)?.answer
+  }
 }
 </script>

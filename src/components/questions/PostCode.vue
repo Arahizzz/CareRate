@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { Action } from 'vuex-class'
+import { Getter } from 'vuex-class'
 const namespace = 'profile'
 @Component
 export default class FreeText extends Vue {

@@ -27,7 +27,6 @@ export default class FreeText extends Vue {
   answer = '';
 
   mounted () {
-    console.log("mounted "+this.id)
     this.answer = this.answerGetter(this.id)?.answer
   }
 }
