@@ -23,6 +23,7 @@
           </q-carousel-slide>
           <q-carousel-slide v-for="(question,index) of questions" :name="index+1" :key="index" class="column no-wrap flex-center">
             <div class="q-mt-md text-center" style="min-width:50%">
+              <p>{{quetion.title}}</p>
               <question-card :question="question"></question-card>
             </div>
           </q-carousel-slide>

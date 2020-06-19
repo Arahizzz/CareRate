@@ -6,7 +6,8 @@ import { ProfileState, RootState } from 'Models/types'
 
 export const state: ProfileState = {
   questions: undefined,
-  answers: {}
+  answers: {},
+  language: 'nl-Nl'
 }
 
 const namespaced = true

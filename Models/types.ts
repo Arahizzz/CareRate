@@ -4,6 +4,7 @@ export interface RootState {
 }
 
 export interface ProfileState {
-  questions?: Array<Question>;
+  questions: any;
   answers: Record<string, string>;
+  language: string;
 }
