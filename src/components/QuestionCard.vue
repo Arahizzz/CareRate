@@ -22,6 +22,6 @@ Vue.component('yes-no', YesNo)
 @Component
 export default class QuestionCard extends Vue {
 @Prop()
-question: Question
+question!: Question
 }
 </script>

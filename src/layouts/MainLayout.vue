@@ -92,13 +92,13 @@ export default class MainLayout extends Vue {
   fetchData: any;
 
   @Getter('questions', { namespace })
-  questions: Array<Question>;
+  questions!: Array<Question>;
 
   @Getter('questionsCount', { namespace })
-  questionsCount: number;
+  questionsCount!: number;
 
   @Getter('answers', { namespace })
-  answers: Record<string, string>;
+  answers!: Record<string, string>;
 
   startSlide = 0;
 

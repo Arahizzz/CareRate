@@ -10,6 +10,6 @@ import { Component, Prop } from 'vue-property-decorator'
 @Component
 export default class Rating extends Vue {
   @Prop({ default: '' })
-  questionId:string
+  questionId!: string
 }
 </script>

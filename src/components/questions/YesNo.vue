@@ -13,7 +13,7 @@ const namespace = 'profile'
 @Component
 export default class YesNo extends Vue {
   @Prop({ default: '' })
-  questionId:string
+  questionId!: string
 
   @Action('addAnswer', { namespace })
   addAnswer: any
