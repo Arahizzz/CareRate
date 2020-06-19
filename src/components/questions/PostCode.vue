@@ -17,7 +17,7 @@ import { Component, Prop } from 'vue-property-decorator'
 @Component
 export default class FreeText extends Vue {
   @Prop({ default: '' })
-  questionId:string
+  questionId!: string
 
   answer = '';
   fontSizePx = 50;
