@@ -76,7 +76,7 @@
 import Vue from 'vue'
 import { Action, Getter } from 'vuex-class'
 import { Question } from 'Models/Question/Question'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import QuestionCard from 'components/QuestionCard.vue'
 import StartCard from 'components/StartCard.vue'
 
@@ -85,6 +85,9 @@ Vue.component('start-card', StartCard)
 const namespace = 'profile'
 @Component
 export default class MainLayout extends Vue {
+  @Prop({ default: 'tst001' })
+  surveyId:string
+
   @Action('fetchData', { namespace })
   fetchData: any;
 
@@ -102,7 +105,7 @@ export default class MainLayout extends Vue {
   slideIndex = 0;
 
   mounted () {
-    this.fetchData()
+    this.fetchData(this.surveyId)
   }
 
   handleEnd () {
