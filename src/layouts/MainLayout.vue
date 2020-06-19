@@ -23,7 +23,7 @@
           </q-carousel-slide>
           <q-carousel-slide v-for="(question,index) of questions" :name="index+1" :key="index" class="column no-wrap flex-center">
             <div class="q-mt-md text-center" style="min-width:50%">
-              <p>{{quetion.title}}</p>
+              <p>{{question.title}}</p>
               <question-card :question="question"></question-card>
             </div>
           </q-carousel-slide>
@@ -76,10 +76,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Action, Getter } from 'vuex-class'
-import { Question } from 'Models/Question/Question'
 import { Component, Prop } from 'vue-property-decorator'
 import QuestionCard from 'components/QuestionCard.vue'
 import StartCard from 'components/StartCard.vue'
+import { TranslatedQuestion } from '../../Models/Question/TranslatedQuestion'
 
 Vue.component('question-card', QuestionCard)
 Vue.component('start-card', StartCard)
@@ -87,13 +87,13 @@ const namespace = 'profile'
 @Component
 export default class MainLayout extends Vue {
   @Prop({ default: 'tst001' })
-  surveyId:string
+  surveyId!: string
 
   @Action('fetchData', { namespace })
   fetchData: any;
 
   @Getter('questions', { namespace })
-  questions!: Array<Question>;
+  questions!: Array<TranslatedQuestion>;
 
   @Getter('questionsCount', { namespace })
   questionsCount!: number;
