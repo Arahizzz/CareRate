@@ -1,0 +1,42 @@
+<template>
+<div class="q-pa-lg">
+    <q-option-group
+      v-model="answer"
+      :options="getButtonLabels()"
+      color="primary"
+    />
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { Component, Prop } from 'vue-property-decorator'
+import { Getter } from 'vuex-class'
+import { TranslatedQuestionOption } from '../../../Models/Question/TranslatedQuestion'
+const namespace = 'profile'
+@Component
+export default class SingleChoice extends Vue {
+  @Prop({ default: '' })
+  id!: string
+
+    @Prop({ default: [] })
+    options!: TranslatedQuestionOption[]
+
+    handleAnswer () {
+      this.$emit('answered', this.answer)
+    }
+
+  @Getter('answerById', { namespace })
+  answerGetter!: (id: string) => string | undefined;
+
+  getButtonLabels () {
+    return this.options.map((opt) => { return { label: opt.title, value: opt.title } })
+  }
+
+  answer = '';
+
+  mounted () {
+    this.answer = this.answerGetter(this.id) ?? ''
+  }
+}
+</script>

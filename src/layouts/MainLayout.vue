@@ -89,7 +89,7 @@ export default class MainLayout extends Vue {
   surveyId!: string
 
   @Action('fetchData', { namespace })
-  fetchData: any;
+  fetchData!: (surveyId: string) => void;
 
   @Getter('questions', { namespace })
   questions!: Array<TranslatedQuestion>;
