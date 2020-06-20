@@ -33,7 +33,7 @@ export default class MultipleChoice extends Vue {
   answerGetter!: (id: string) => { answer: number[] } | undefined;
 
   getButtonLabels () {
-    return this.options.forEach((opt, index) => { return { label: opt.title, value: index } })
+    return this.options.map((opt, index) => { return { label: opt.title, value: index } })
   }
 
   answer: number[] = [];
