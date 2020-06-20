@@ -11,6 +11,7 @@
         'line-height': '150%',
         'text-align': 'center'
  }"
+ @change="handleAnswer"
     dense
   />
 </template>
@@ -25,7 +26,8 @@ export default class Age extends Vue {
   @Prop({ default: '' })
   id!: string
 
-  handleAnswer () {
+  handleAnswer (newAnswer: number) {
+    this.answer = newAnswer
     this.$emit('answered', this.answer)
   }
 

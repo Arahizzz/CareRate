@@ -4,6 +4,7 @@
       v-model="answer"
       :options="getButtonLabels()"
       color="primary"
+      @change="handleAnswer"
     />
   </div>
 </template>
@@ -22,7 +23,8 @@ export default class SingleChoice extends Vue {
     @Prop({ default: [] })
     options!: TranslatedQuestionOption[]
 
-    handleAnswer () {
+    handleAnswer (newAnswer: string) {
+      this.answer = newAnswer
       this.$emit('answered', this.answer)
     }
 

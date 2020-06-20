@@ -6,8 +6,9 @@
       :step="1"
        label
       label-always
-      color="light-green"
-    />
+      color="deep-orange"
+      @change="handleAnswer"
+  />
 </template>
 
 <script lang="ts">
@@ -26,14 +27,15 @@ export default class Slider extends Vue {
   @Prop({ default: 10 })
   max!: number
 
-  handleAnswer () {
+  handleAnswer (newAnswer: number) {
+    this.answer = newAnswer
     this.$emit('answered', this.answer)
   }
 
   @Getter('answerById', { namespace })
   answerGetter!: (id: string) => number | undefined;
 
-  answer!: number;
+  answer = 0;
 
   mounted () {
     this.answer = this.answerGetter(this.id) ?? 5

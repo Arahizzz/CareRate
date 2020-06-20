@@ -1,6 +1,7 @@
 <template>
   <div class="q-pa-lg">
-    <q-option-group v-model="answer" :options="getButtonLabels()" color="primary" type="checkbox" />
+    <q-option-group v-model="answer" :options="getButtonLabels()" color="primary" type="checkbox"
+    @change="handleAnswer" />
   </div>
 </template>
 
@@ -18,7 +19,8 @@ export default class MultiChoice extends Vue {
   @Prop({ default: [] })
   options!: TranslatedQuestionOption[]
 
-  handleAnswer () {
+  handleAnswer (newAnswer: string[]) {
+    this.answer = newAnswer
     this.$emit('answered', this.answer)
   }
 
