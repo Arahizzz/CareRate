@@ -33,12 +33,12 @@ export default class Slider extends Vue {
   }
 
   @Getter('answerById', { namespace })
-  answerGetter!: (id: string) => number | undefined;
+  answerGetter!: (id: string) => {answer: number} | undefined;
 
   answer = 0;
 
   mounted () {
-    this.answer = this.answerGetter(this.id) ?? 5
+    this.answer = this.answerGetter(this.id)?.answer ?? 5
   }
 }
 </script>

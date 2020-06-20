@@ -14,6 +14,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { Getter } from 'vuex-class'
 import { TranslatedQuestionOption } from '../../../Models/Question/TranslatedQuestion'
+import { SelectedAnswer } from '../../../Models/Question/SelectedAnswer'
 const namespace = 'profile'
 @Component
 export default class SingleChoice extends Vue {
@@ -24,20 +25,22 @@ export default class SingleChoice extends Vue {
     options!: TranslatedQuestionOption[]
 
     handleAnswer () {
-      this.$emit('answered', this.answer)
+      if (this.answer) {
+        this.$emit('answered', this.answer, this.options[this.answer.index].askForExplanation)
+      }
     }
 
   @Getter('answerById', { namespace })
-  answerGetter!: (id: string) => string | undefined;
+  answerGetter!: (id: string) => {answer: SelectedAnswer } | undefined;
 
   getButtonLabels () {
-    return this.options.map((opt) => { return { label: opt.title, value: opt.title } })
+    return this.options.map((opt, index) => { return { label: opt.title, value: index } })
   }
 
-  answer = '';
+  answer: SelectedAnswer | null = null;
 
   mounted () {
-    this.answer = this.answerGetter(this.id) ?? ''
+    this.answer = this.answerGetter(this.id)?.answer ?? null
   }
 }
 </script>

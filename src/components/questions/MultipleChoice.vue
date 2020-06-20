@@ -10,6 +10,7 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { Getter } from 'vuex-class'
 import { TranslatedQuestionOption } from '../../../Models/Question/TranslatedQuestion'
+import { SelectedAnswer } from '../../../Models/Question/SelectedAnswer'
 const namespace = 'profile'
 @Component
 export default class MultipleChoice extends Vue {
@@ -19,27 +20,22 @@ export default class MultipleChoice extends Vue {
   @Prop({ default: [] })
   options!: TranslatedQuestionOption[]
 
-  handleAnswer (newAnswer: string[]) {
-    this.answer = newAnswer
-    this.$emit('answered', this.answer)
+  handleAnswer (newAnswer: SelectedAnswer[]) {
+    const askForExplanation = newAnswer.map((ans) => this.options[ans.index].askForExplanation).includes(true)
+    this.$emit('answered', newAnswer, askForExplanation)
   }
 
   @Getter('answerById', { namespace })
-  answerGetter!: (id: string) => string | undefined;
+  answerGetter!: (id: string) => {answer: SelectedAnswer[]} | undefined;
 
   getButtonLabels () {
-    return this.options.map((opt) => { return { label: opt.title, value: opt.title } })
+    return this.options.forEach((opt, index) => { return { label: opt.title, value: { index, text: opt.title } } })
   }
 
-  answer: string[] = [];
+  answer: SelectedAnswer[] = [];
 
   mounted () {
-    const ans = this.answerGetter(this.id)
-    if (ans) {
-      this.answer = [ans]
-    } else {
-      this.answer = []
-    }
+    this.answer = this.answerGetter(this.id)?.answer ?? []
   }
 }
 </script>

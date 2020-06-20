@@ -32,12 +32,12 @@ export default class Age extends Vue {
   }
 
   @Getter('answerById', { namespace })
-  answerGetter!: (id: string) => number | undefined;
+  answerGetter!: (id: string) => {answer: number} | undefined;
 
   answer = 0;
 
   mounted () {
-    this.answer = this.answerGetter(this.id) ?? 0
+    this.answer = this.answerGetter(this.id)?.answer ?? 0
   }
 }
 </script>
