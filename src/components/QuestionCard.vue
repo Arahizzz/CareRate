@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p style="font-size:3vw; margin:10px">
+    <p style="font-size:150%;font-weight:bold; margin:10px">
       {{question.title}}
       <span v-if="question.isRequired" style="color:red">*</span>
     </p>

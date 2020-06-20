@@ -10,7 +10,6 @@
           transition-next="slide-left"
           swipeable
           animated
-          navigation
           padding
           height="100%"
           class="bg-transparent text-black"
