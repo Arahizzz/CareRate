@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-lg">
     <q-option-group v-model="answer" :options="getButtonLabels()" color="primary" type="checkbox"
-    @change="handleAnswer" />
+    @input="handleAnswer" />
   </div>
 </template>
 
@@ -12,7 +12,7 @@ import { Getter } from 'vuex-class'
 import { TranslatedQuestionOption } from '../../../Models/Question/TranslatedQuestion'
 const namespace = 'profile'
 @Component
-export default class MultiChoice extends Vue {
+export default class MultipleChoice extends Vue {
   @Prop({ default: '' })
   id!: string
 

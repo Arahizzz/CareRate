@@ -112,6 +112,7 @@ export default class MainLayout extends Vue {
   }
 
   mounted () {
+    console.log(this.surveyId)
     this.fetchData(this.surveyId)
   }
 

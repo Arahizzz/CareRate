@@ -3,8 +3,8 @@
     <q-option-group
       v-model="answer"
       :options="getButtonLabels()"
-      color="primary"
-      @change="handleAnswer"
+      color="deep-orange"
+      @input="handleAnswer"
     />
   </div>
 </template>
@@ -23,8 +23,7 @@ export default class SingleChoice extends Vue {
     @Prop({ default: [] })
     options!: TranslatedQuestionOption[]
 
-    handleAnswer (newAnswer: string) {
-      this.answer = newAnswer
+    handleAnswer () {
       this.$emit('answered', this.answer)
     }
 

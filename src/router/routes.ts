@@ -3,7 +3,8 @@ import { RouteConfig } from 'vue-router'
 const routes: RouteConfig[] = [
   {
     path: '/:surveyId',
-    component: () => import('layouts/MainLayout.vue')
+    component: () => import('layouts/MainLayout.vue'),
+    props: true
   }
 ]
 
