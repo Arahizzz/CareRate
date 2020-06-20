@@ -35,7 +35,7 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { Question } from 'Models/Question/Question'
-import { Action } from 'vuex-class'
+import { Action, Getter } from 'vuex-class'
 
 import Rating from './questions/Rating.vue'
 import FreeText from './questions/FreeText.vue'
@@ -61,6 +61,9 @@ export default class QuestionCard extends Vue {
   @Prop()
   question!: Question
 
+  @Getter('answerById', { namespace })
+  answerGetter: any;
+
   @Action('addAnswer', { namespace })
   addAnswer: any
 
@@ -83,18 +86,23 @@ export default class QuestionCard extends Vue {
   handleMultipleAnswer (answer: {}) {
     console.log('trigger')
     console.log(answer)
-    this.addAnswer({ [this.question.id]: { answer, details: this.details } })
     this.askForExplanation = answer.askForExplanation
+    this.addAnswer({ [this.question.id]: { answer, details: this.details, askForExplanation: this.askForExplanation } })
   }
 
   public saveAnswer () {
     console.log('saving')
-    this.addAnswer({ [this.question.id]: { answer: this.$refs.question.answer, details: this.details } })
+    this.addAnswer({ [this.question.id]: { answer: this.$refs.question.answer, details: this.details, askForExplanation: this.askForExplanation } })
   }
 
   mounted () {
     console.log(this.question.questionType)
     console.log(this.question.id)
+    const answer = this.answerGetter(this.question.id)
+    if (answer) {
+      this.details = answer.details
+      this.askForExplanation = answer.askForExplanation
+    }
   }
 }
 </script>
