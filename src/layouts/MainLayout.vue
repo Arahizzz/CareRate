@@ -1,8 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <div class="column" style="height:100vh">
-      <div class="col" >
-      </div>
+      <div class="col"></div>
       <div class="col-8">
         <q-carousel
           v-model="slideIndex"
@@ -21,9 +20,18 @@
               <start-card></start-card>
             </div>
           </q-carousel-slide>
-          <q-carousel-slide v-for="(question,index) of questions" :name="index+1" :key="index" class="column flex-center">
+          <q-carousel-slide
+            v-for="(question,index) of questions"
+            :name="index+1"
+            :key="index"
+            class="column flex-center"
+          >
             <div class="q-mt-md text-center" style="min-width:50%; max-width:60%">
-              <question-card ref="currentQuestion" :question="question" @answered="$refs.carousel.next()"></question-card>
+              <question-card
+                ref="currentQuestion"
+                :question="question"
+                @answered="$refs.carousel.next()"
+              ></question-card>
             </div>
           </q-carousel-slide>
 
@@ -34,42 +42,41 @@
           </q-carousel-slide>
 
           <template v-slot:control>
-              <q-carousel-control
-              position="left"
-                class="q-gutter-xs flex flex-center"
-              >
-                <q-btn
-                  dense color="deep-orange" text-color="white" icon="arrow_left" size="xl"
-                  @click="carouselPrevios"
-                />
-              </q-carousel-control>
-              <q-carousel-control
-                position="right"
-                class="q-gutter-xs  flex flex-center"
-              >
-                <q-btn
-                  dense color="deep-orange" text-color="white" icon="arrow_right" size="xl"
-                  @click="carouselNext"
-                />
-              </q-carousel-control>
-              <q-carousel-control
-                position="top"
-              >
-                <q-slider
-                  v-model="slideIndex"
-                  ref="slider"
-                  markers
-                  :min="0"
-                  :max="questionsCount+1"
-                  color="deep-orange"
-                  @input="carouselToSlide"
-                />
-              </q-carousel-control>
+            <q-carousel-control position="left" class="q-gutter-xs flex flex-center">
+              <q-btn
+                dense
+                color="deep-orange"
+                text-color="white"
+                icon="arrow_left"
+                size="xl"
+                @click="carouselPrevios"
+              />
+            </q-carousel-control>
+            <q-carousel-control position="right" class="q-gutter-xs flex flex-center">
+              <q-btn
+                dense
+                color="deep-orange"
+                text-color="white"
+                icon="arrow_right"
+                size="xl"
+                @click="carouselNext"
+              />
+            </q-carousel-control>
+            <q-carousel-control position="top">
+              <q-slider
+                v-model="slideIndex"
+                ref="slider"
+                markers
+                :min="0"
+                :max="questionsCount+1"
+                color="deep-orange"
+                @input="carouselToSlide"
+              />
+            </q-carousel-control>
           </template>
         </q-carousel>
       </div>
-      <div class="col">
-      </div>
+      <div class="col"></div>
     </div>
   </q-layout>
 </template>
@@ -112,8 +119,8 @@ export default class MainLayout extends Vue {
   @Watch('slideIndex')
   slideIndexWatcher (value: number, oldValue: number) {
     try {
-      this.$refs.currentQuestion[0].saveAnswer()
-    } catch (error) {}
+      (this.$refs.currentQuestion as HTMLFormElement[])[0].saveAnswer()
+    } catch (error) { }
   }
 
   carouselToSlide (newSlideIndex: number) {
@@ -125,15 +132,15 @@ export default class MainLayout extends Vue {
         break
       }
     }
-    console.log(this.slideIndex)
-    this.$refs.slider.model = this.slideIndex
+    console.log(this.slideIndex);
+    (this.$refs.slider as HTMLFormElement).model = this.slideIndex
   }
 
   carouselPrevios () {
     if (this.slideIndex > 0) {
       const question = this.questions[this.slideIndex - 1]
       if (!question.isRequired || this.answerGetter(question.id) != null) {
-        this.$refs.carousel.previous()
+        (this.$refs.carousel as HTMLFormElement).previous()
       } else {
         alert('question is mandatory')
       }
@@ -144,13 +151,13 @@ export default class MainLayout extends Vue {
     if (this.slideIndex > 0) {
       const question = this.questions[this.slideIndex - 1]
       if (!question.isRequired || this.answerGetter(question.id) != null) {
-        this.$refs.carousel.next()
+        (this.$refs.carousel as HTMLFormElement).next()
       } else {
         console.log(this.answerGetter(question.id))
         alert('question is mandatory')
       }
     } else {
-      this.$refs.carousel.next()
+      (this.$refs.carousel as HTMLFormElement).next()
     }
   }
 
