@@ -18,7 +18,7 @@ const namespace = 'profile'
 @Component
 export default class FreeText extends Vue {
   @Prop({ default: '' })
-  id: string
+  id!: string
 
   handleAnswer () {
     if (this.answer.length > 0) {

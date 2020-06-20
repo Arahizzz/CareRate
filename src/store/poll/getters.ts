@@ -17,10 +17,10 @@ export const getters: GetterTree<ProfileState, RootState> = {
   questionsCount (state): number {
     return state.questions?.length || 0
   },
-  answers (state): Record<string, string> {
+  answers (state): Record<string, string | number | number[]> {
     return state.answers
   },
-  answerById (state): any {
+  answerById (state): (id: string) => string | number | number[] {
     return (id: string) => state.answers[id]
   },
   language (state): string {

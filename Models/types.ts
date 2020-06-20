@@ -4,7 +4,7 @@ export interface RootState {
 }
 
 export interface ProfileState {
-  questions: TranslatedQuestion[];
-  answers: {};
+  questions: TranslatedQuestion[] | null;
+  answers: Record<string, string | number | number[]>;
   language: string;
 }

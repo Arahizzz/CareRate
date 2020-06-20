@@ -1,17 +1,68 @@
 <template>
   <div>
-    <p style="font-size:3vw; margin:10px">{{question.title}} <span v-if="question.isRequired" style="color:red">*</span></p>
+    <p style="font-size:3vw; margin:10px">
+      {{question.title}}
+      <span v-if="question.isRequired" style="color:red">*</span>
+    </p>
 
-    <rating v-if="question.questionType===0 || question.questionType===5 || question.questionType===6" ref="question" :id="question.id" @answered="handleAnswer"></rating>
-    <yes-no v-else-if="question.questionType===1" ref="question" :id="question.id" @answered="handleAnswer"></yes-no>
-    <single-choice v-else-if="question.questionType===2 || question.questionType===6 || question.questionType===10" ref="question" :id="question.id" :options="question.options" @answered="handleAnswer"></single-choice>
-    <free-text v-else-if="question.questionType===3 || question.questionType===8 || question.questionType===9" ref="question" :id="question.id" @answered="handleAnswer"></free-text>
-    <multiple-choice v-else-if="question.questionType===4" ref="question" :id="question.id" :options="question.options" @answered="handleMultipleAnswer"></multiple-choice>
-    <slider v-else-if="question.questionType===7" ref="question" :id="question.id" @answered="handleAnswer"></slider>
-    <post-code v-else-if="question.questionType===11" ref="question" :id="question.id" @answered="handleAnswer"></post-code>
-    <age v-else-if="question.questionType===12" ref="question" :id="question.id" @answered="handleAnswer"></age>
+    <rating
+      v-if="question.questionType===0 || question.questionType===5 || question.questionType===6"
+      ref="question"
+      :id="question.id"
+      @answered="handleAnswer"
+    ></rating>
+    <yes-no
+      v-else-if="question.questionType===1"
+      ref="question"
+      :id="question.id"
+      @answered="handleAnswer"
+    ></yes-no>
+    <single-choice
+      v-else-if="question.questionType===2 || question.questionType===7 || question.questionType===10"
+      ref="question"
+      :id="question.id"
+      :options="question.options"
+      @answered="handleAnswer"
+    ></single-choice>
+    <free-text
+      v-else-if="question.questionType===3 || question.questionType===8 || question.questionType===9"
+      ref="question"
+      :id="question.id"
+      @answered="handleAnswer"
+    ></free-text>
+    <multiple-choice
+      v-else-if="question.questionType===4"
+      ref="question"
+      :id="question.id"
+      :options="question.options"
+      @answered="handleMultipleAnswer"
+    ></multiple-choice>
+    <slider
+      v-else-if="question.questionType===7"
+      ref="question"
+      :id="question.id"
+      @answered="handleAnswer"
+    ></slider>
+    <post-code
+      v-else-if="question.questionType===11"
+      ref="question"
+      :id="question.id"
+      @answered="handleAnswer"
+    ></post-code>
+    <age
+      v-else-if="question.questionType===12"
+      ref="question"
+      :id="question.id"
+      @answered="handleAnswer"
+    ></age>
 
-    <q-btn v-if="askForExplanation" color="deep-orange" style="margin-top:10px" outline @click="prompt = true">Add details</q-btn>
+    <q-btn
+      v-if="askForExplanation"
+      color="deep-orange"
+      style="margin-top:10px"
+      outline
+      @click="prompt = true"
+    >Add details</q-btn>
     <q-dialog v-model="prompt" persistent>
       <q-card style="min-width: 350px">
         <q-card-section>
@@ -24,7 +75,13 @@
 
         <q-card-actions align="right" class="text-primary">
           <q-btn outline color="deep-orange" label="Cancel" v-close-popup />
-          <q-btn outline color="deep-orange" label="Submit" v-close-popup @click="$emit('answered')" />
+          <q-btn
+            outline
+            color="deep-orange"
+            label="Submit"
+            v-close-popup
+            @click="$emit('answered')"
+          />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -34,7 +91,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
-import { Question } from 'Models/Question/Question'
 import { Action } from 'vuex-class'
 
 import Rating from './questions/Rating.vue'
@@ -45,6 +101,7 @@ import MultipleChoice from './questions/MultipleChoice.vue'
 import SingleChoice from './questions/SingleChoice.vue'
 import Slider from './questions/Slider.vue'
 import Age from './questions/Age.vue'
+import { TranslatedQuestion } from '../../Models/Question/TranslatedQuestion'
 
 Vue.component('rating', Rating)
 Vue.component('free-text', FreeText)
@@ -59,7 +116,7 @@ const namespace = 'profile'
 @Component
 export default class QuestionCard extends Vue {
   @Prop()
-  question!: Question
+  question!: TranslatedQuestion
 
   @Action('addAnswer', { namespace })
   addAnswer: any
@@ -70,7 +127,7 @@ export default class QuestionCard extends Vue {
 
   askForExplanation = false
 
-  handleAnswer (answer: {}) {
+  handleAnswer (answer: { askForExplanation: boolean; answer: string | number }) {
     console.log('trigger')
     console.log(answer)
     this.addAnswer({ [this.question.id]: { answer, details: this.details } })
@@ -80,7 +137,7 @@ export default class QuestionCard extends Vue {
     }
   }
 
-  handleMultipleAnswer (answer: {}) {
+  handleMultipleAnswer (answer: { askForExplanation: boolean; answer: number[] }) {
     console.log('trigger')
     console.log(answer)
     this.addAnswer({ [this.question.id]: { answer, details: this.details } })
@@ -89,7 +146,8 @@ export default class QuestionCard extends Vue {
 
   public saveAnswer () {
     console.log('saving')
-    this.addAnswer({ [this.question.id]: { answer: this.$refs.question.answer, details: this.details } })
+    this.addAnswer({ [this.question.id]: { answer: (this.$refs.question as HTMLFormElement).answer, details: this.details } })
+    this.addAnswer({ [this.question.id]: { answer: (this.$refs.question as HTMLFormElement).answer } })
   }
 
   mounted () {

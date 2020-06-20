@@ -8,7 +8,7 @@ export const mutations: MutationTree<ProfileState> = {
   profileLoaded (state, payload: Question[]) {
     state.questions = payload.map((q) => TranslatedQuestion.translateQuestion(q, 'nl-NL'))
   },
-  addAnswer (state, payload: Record<string, string>) {
+  addAnswer (state, payload: Record<string, string | number | number[]>) {
     for (const [key, value] of Object.entries(payload)) {
       Vue.set(state.answers, key, value)
     }
