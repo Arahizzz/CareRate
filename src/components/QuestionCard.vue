@@ -1,12 +1,13 @@
 <template>
   <div>
-    <p class="text-h3">{{question.title}}</p>
+    <p style="font-size:3vw; margin:10px">{{question.title}} <span v-if="question.isRequired" style="color:red">*</span></p>
 
     <rating v-if="question.questionType===0 || question.questionType===5 || question.questionType===6" ref="question" :id="question.id" @answered="handleAnswer"></rating>
     <yes-no v-else-if="question.questionType===1" ref="question" :id="question.id" @answered="handleAnswer"></yes-no>
     <single-choice v-else-if="question.questionType===2 || question.questionType===6 || question.questionType===10" ref="question" :id="question.id" :options="question.options" @answered="handleAnswer"></single-choice>
     <free-text v-else-if="question.questionType===3 || question.questionType===8 || question.questionType===9" ref="question" :id="question.id" @answered="handleAnswer"></free-text>
-    <multiple-choice v-else-if="question.questionType===4" ref="question" :id="question.id" :options="question.options" @answered="handleAnswer"></multiple-choice>
+    <multiple-choice v-else-if="question.questionType===4" ref="question" :id="question.id" :options="question.options" @answered="handleMultipleAnswer"></multiple-choice>
+    <slider v-else-if="question.questionType===7" ref="question" :id="question.id" @answered="handleAnswer"></slider>
     <post-code v-else-if="question.questionType===11" ref="question" :id="question.id" @answered="handleAnswer"></post-code>
     <age v-else-if="question.questionType===12" ref="question" :id="question.id" @answered="handleAnswer"></age>
 
@@ -69,22 +70,31 @@ export default class QuestionCard extends Vue {
 
   askForExplanation = false
 
-  handleAnswer (answer: string) {
-    console.log("trigger")
+  handleAnswer (answer: {}) {
+    console.log('trigger')
+    console.log(answer)
     this.addAnswer({ [this.question.id]: { answer, details: this.details } })
-    this.askForExplanation = this.$refs.question.answer.options?.askForExplanation
+    this.askForExplanation = answer.askForExplanation
     if (!this.askForExplanation) {
       this.$emit('answered')
     }
   }
 
+  handleMultipleAnswer (answer: {}) {
+    console.log('trigger')
+    console.log(answer)
+    this.addAnswer({ [this.question.id]: { answer, details: this.details } })
+    this.askForExplanation = answer.askForExplanation
+  }
+
   public saveAnswer () {
     console.log('saving')
-    this.addAnswer({ [this.question.id]: { answer: this.$refs.question.answer } })
+    this.addAnswer({ [this.question.id]: { answer: this.$refs.question.answer, details: this.details } })
   }
 
   mounted () {
-    console.log(this.question)
+    console.log(this.question.questionType)
+    console.log(this.question.id)
   }
 }
 </script>

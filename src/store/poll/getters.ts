@@ -2,11 +2,16 @@
 import { RootState, ProfileState } from 'Models/types'
 import { GetterTree } from 'vuex'
 import { TranslatedQuestion } from 'app/Models/Question/TranslatedQuestion'
-import { state } from './profile'
 
 export const getters: GetterTree<ProfileState, RootState> = {
   questions (state): TranslatedQuestion[] | undefined {
     console.log(state.questions)
+    /* // test
+    state.questions?.forEach((q, i) => {
+      if (q.questionType != 7) {
+        q.isRequired = (i % 5 === 0)
+      }
+    }) */
     return state.questions
   },
   questionsCount (state): number {

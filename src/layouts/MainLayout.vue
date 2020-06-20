@@ -21,8 +21,8 @@
               <start-card></start-card>
             </div>
           </q-carousel-slide>
-          <q-carousel-slide v-for="(question,index) of questions" :name="index+1" :key="index" class="column no-wrap flex-center">
-            <div class="q-mt-md text-center" style="min-width:50%">
+          <q-carousel-slide v-for="(question,index) of questions" :name="index+1" :key="index" class="column flex-center">
+            <div class="q-mt-md text-center" style="min-width:50%; max-width:60%">
               <question-card ref="currentQuestion" :question="question" @answered="$refs.carousel.next()"></question-card>
             </div>
           </q-carousel-slide>
@@ -40,7 +40,7 @@
               >
                 <q-btn
                   dense color="deep-orange" text-color="white" icon="arrow_left" size="xl"
-                  @click="$refs.carousel.previous()"
+                  @click="carouselPrevios"
                 />
               </q-carousel-control>
               <q-carousel-control
@@ -49,7 +49,7 @@
               >
                 <q-btn
                   dense color="deep-orange" text-color="white" icon="arrow_right" size="xl"
-                  @click="$refs.carousel.next()"
+                  @click="carouselNext"
                 />
               </q-carousel-control>
               <q-carousel-control
@@ -57,10 +57,12 @@
               >
                 <q-slider
                   v-model="slideIndex"
+                  ref="slider"
                   markers
                   :min="0"
                   :max="questionsCount+1"
                   color="deep-orange"
+                  @input="carouselToSlide"
                 />
               </q-carousel-control>
           </template>
@@ -100,15 +102,56 @@ export default class MainLayout extends Vue {
   @Getter('answers', { namespace })
   answers!: {};
 
+  @Getter('answerById', { namespace })
+  answerGetter: any;
+
   startSlide = 0;
 
   slideIndex = 0;
 
   @Watch('slideIndex')
-  carouselNext () {
+  slideIndexWatcher (value: number, oldValue: number) {
     try {
       this.$refs.currentQuestion[0].saveAnswer()
     } catch (error) {}
+  }
+
+  carouselToSlide (newSlideIndex: number) {
+    const [min, max] = [0, newSlideIndex - 1]
+    console.log({ min, max })
+    for (let i = min; i < max; i++) {
+      if (this.questions[i].isRequired && this.answerGetter(this.questions[i].id) == null) {
+        this.slideIndex = i + 1
+        break
+      }
+    }
+    console.log(this.slideIndex)
+    this.$refs.slider.model = this.slideIndex
+  }
+
+  carouselPrevios () {
+    if (this.slideIndex > 0) {
+      const question = this.questions[this.slideIndex - 1]
+      if (!question.isRequired || this.answerGetter(question.id) != null) {
+        this.$refs.carousel.previous()
+      } else {
+        alert('question is mandatory')
+      }
+    }
+  }
+
+  carouselNext () {
+    if (this.slideIndex > 0) {
+      const question = this.questions[this.slideIndex - 1]
+      if (!question.isRequired || this.answerGetter(question.id) != null) {
+        this.$refs.carousel.next()
+      } else {
+        console.log(this.answerGetter(question.id))
+        alert('question is mandatory')
+      }
+    } else {
+      this.$refs.carousel.next()
+    }
   }
 
   mounted () {

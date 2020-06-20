@@ -25,7 +25,7 @@ export default class SingleChoice extends Vue {
 
     handleAnswer () {
       if (this.answer) {
-        this.$emit('answered', this.answer, this.options[this.answer].askForExplanation)
+        this.$emit('answered', { answer: this.answer, askForExplanation: this.options[this.answer].askForExplanation })
       }
     }
 

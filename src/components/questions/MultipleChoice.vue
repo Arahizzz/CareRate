@@ -24,9 +24,9 @@ export default class MultipleChoice extends Vue {
   @Prop({ default: [] })
   options!: TranslatedQuestionOption[]
 
-  handleAnswer (newAnswer: number[]) {
-    const askForExplanation = newAnswer.map((ans) => this.options[ans].askForExplanation).includes(true)
-    this.$emit('answered', newAnswer, askForExplanation)
+  handleAnswer () {
+    const askForExplanation = this.answer.map((ans) => this.options[ans].askForExplanation).includes(true)
+    this.$emit('answered', { answer: this.answer, askForExplanation })
   }
 
   @Getter('answerById', { namespace })

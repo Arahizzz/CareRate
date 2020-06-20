@@ -1,6 +1,6 @@
 <template>
 <div class="q-pa-md q-gutter-sm">
-  <q-btn v-for="i in 10" :key="i" :color="answer==i+''?'primary':'deep-orange'" @click="()=>{answer=i+''}" round outline :label="i"/>
+  <q-btn v-for="i in 10" :key="i" :color="answer==i+''?'primary':'deep-orange'" @click="()=>{handleAnswer(i+'')}" round outline :label="i"/>
 </div>
 </template>
 
@@ -18,6 +18,11 @@ export default class Rating extends Vue {
   answerGetter: any;
 
   answer = '';
+
+  handleAnswer (newAnswer: string) {
+    this.answer = newAnswer
+    this.$emit('answered', { answer: this.answer, askForExplanation: false })
+  }
 
   mounted () {
     this.answer = this.answerGetter(this.id)?.answer
