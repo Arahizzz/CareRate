@@ -3,7 +3,7 @@ import { ExplanationType } from './ExplanationType'
 import { Question } from './Question'
 import { QuestionOptions } from './QuestionOptions'
 
-export class TranslatedQuestionOptions {
+export class TranslatedQuestionOption {
   constructor (
     public id: string,
     public title: string,
@@ -23,7 +23,7 @@ export class TranslatedQuestion {
     public explanationQuestion: string | null,
     public explanationScoreBelow: number | null,
     public maxSelection: number | null,
-    public options: TranslatedQuestionOptions[]
+    public options: TranslatedQuestionOption[]
   ) { }
 
   static translateQuestion (q: Question, translation: string): TranslatedQuestion {
@@ -46,7 +46,7 @@ export class TranslatedQuestion {
       explanationQuestion,
       q.explanationScoreBelow ?? null,
       q.maxSelection ?? null,
-      q.options?.map<TranslatedQuestionOptions>((opt: QuestionOptions) => new TranslatedQuestionOptions(
+      q.options?.map<TranslatedQuestionOption>((opt: QuestionOptions) => new TranslatedQuestionOption(
         opt.id,
         opt.title[translation],
         opt.emoji ?? null,
