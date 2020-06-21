@@ -1,6 +1,6 @@
 <template>
 <div class="q-pa-md q-gutter-sm">
-  <q-btn class="options" v-for="i in 10" :key="i" :color="answer==i+''?'primary':'deep-orange'" @click="()=>{handleAnswer(i+'')}" round outline :label="i"/>
+  <q-btn class="fontsize-12 options" v-for="i in 10" :key="i" :color="answer==i+''?'primary':'deep-orange'" @click="()=>{handleAnswer(i+'')}" round outline :label="i"/>
 </div>
 </template>
 

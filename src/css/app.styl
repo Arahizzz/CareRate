@@ -1,0 +1,12 @@
+// app global css in Sass form
+
+//Font sizes that adjust to screen size
+fluid-font-size($minimumSize = 12, $maximumSize = 36, $minimumViewportWidth = 300, $maximumViewportWidth = 1600)
+  font-size: 'calc(%spx + (%s - %s) * ((100vw - %spx) / (%s - %s))) !important' % ($minimumSize $maximumSize $minimumSize $minimumViewportWidth $maximumViewportWidth $minimumViewportWidth)
+
+for num in (8..28)
+  .fontsize-{num}
+    fluid-font-size num (num*2+2) 300 1800
+
+.fontsize-36
+    fluid-font-size 36 (36*2+2) 300 1800

@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-lg">
-    <p class="choose-info">choose as many as you want</p>
-    <q-option-group class="options"
+    <p class="fontsize-14 choose-info">choose as many as you want</p>
+    <q-option-group class="fontsize-20 options"
       v-model="answer"
       :options="getButtonLabels()"
       color="deep-orange"

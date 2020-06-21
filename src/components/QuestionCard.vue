@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="title">
+    <p class="fontsize-20 title">
       {{question.title}}
       <span v-if="question.isRequired" style="color:red">*</span>
     </p>
@@ -170,7 +170,6 @@ export default class QuestionCard extends Vue {
 font-family: PP Woodland;
 font-style: normal;
 font-weight: bold;
-font-size: 20px;
 line-height: 150%;
 color: #FF3908;
 }
@@ -186,7 +185,6 @@ color: #FF3908;
 font-family: PP Woodland;
 font-style: normal;
 font-weight: 250;
-font-size: 20px;
 line-height: 150%;
 
 text-align: center;

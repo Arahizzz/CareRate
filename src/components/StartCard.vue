@@ -1,10 +1,10 @@
 <template>
   <div v-if="info != null">
-    <h2 class="title">{{info.title}}</h2>
-    <p class="description" v-if="info.description != null">{{info.description}}</p>
+    <h2 class="fontsize-24 title">{{info.title}}</h2>
+    <p class="fontsize-14 description" v-if="info.description != null">{{info.description}}</p>
     <div class="row">
       <q-space />
-      <q-btn flat id="start-button" label="Start" @click="start" />
+      <q-btn flat class="fontsize-36" id="start-button" label="Start" @click="start" />
     </div>
   </div>
   <div class="row justify-center" v-else>
@@ -32,15 +32,8 @@ export default class StartCard extends Vue {
   font-family: "PP Woodland";
   font-style: normal;
   font-weight: 250;
-  font-size: 20px;
   line-height: 150%;
   color: #040233;
-}
-
-@media (max-width: 600px) {
-  .description {
-    font-size: 16px;
-  }
 }
 
 #start-button {
@@ -48,7 +41,6 @@ export default class StartCard extends Vue {
   font-family: "Monument Extended";
   font-style: normal;
   font-weight: normal;
-  font-size: 80px;
   line-height: 50%;
 
   /* identical to box height, or 120px */
