@@ -1,13 +1,22 @@
 <template>
-<div>
-  <q-input
-    v-model="answer"
-    input-type="textarea"
-    autogrow
-    dense
-  ></q-input>
-  <q-btn style="margin-top:10px" outline color="deep-orange" @click="handleAnswer">Submit</q-btn>
-</div>
+  <div>
+    <q-input
+      v-model="answer"
+      input-type="textarea"
+      autogrow
+      color="deep-orange"
+      :input-style="{
+      'font-family': 'PP Woodland',
+      'font-style': 'normal',
+      'font-weight': '250',
+      'font-size': '20px',
+      'line-height': '150%',
+      'color': '#FF3908'
+    }"
+      dense
+    ></q-input>
+    <q-btn class="button" style="margin-top:10px" outline color="deep-orange" @click="handleAnswer">Submit</q-btn>
+  </div>
 </template>
 
 <script lang="ts">

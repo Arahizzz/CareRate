@@ -28,16 +28,8 @@ export default class StartCard extends Vue {
 </script>
 
 <style scoped>
-.title {
-  font-family: PP Woodland;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 40px;
-  line-height: 150%;
-}
-
 .description {
-  font-family: PP Woodland;
+  font-family: "PP Woodland";
   font-style: normal;
   font-weight: 250;
   font-size: 20px;
@@ -53,7 +45,7 @@ export default class StartCard extends Vue {
 
 #start-button {
   /* title */
-  font-family: Monument Extended;
+  font-family: "Monument Extended";
   font-style: normal;
   font-weight: normal;
   font-size: 80px;

@@ -175,3 +175,28 @@ export default class MainLayout extends Vue {
   }
 }
 </script>
+
+<style>
+@font-face {
+  font-family: 'PP Woodland';
+  src: url(../assets/fonts/PPWoodland-Bold.otf);
+}
+
+@font-face {
+  font-family: 'Monument Extended';
+  src: url(../assets/fonts/MonumentExtended-Regular.otf);
+}
+
+.title {
+font-family: PP Woodland;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 150%;
+}
+@media (max-width: 600px) {
+  .title {
+    font-size: 24px;
+  }
+}
+</style>

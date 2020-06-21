@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p style="font-size:150%;font-weight:bold; margin:10px">
+    <p class="title">
       {{question.title}}
       <span v-if="question.isRequired" style="color:red">*</span>
     </p>
@@ -58,6 +58,7 @@
 
     <q-btn
       v-if="askForExplanation"
+      class="button"
       color="deep-orange"
       style="margin-top:10px"
       outline
@@ -74,8 +75,8 @@
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
-          <q-btn outline color="deep-orange" label="Cancel" v-close-popup />
-          <q-btn
+          <q-btn class="button" outline color="deep-orange" label="Cancel" v-close-popup />
+          <q-btn class="button"
             outline
             color="deep-orange"
             label="Submit"
@@ -163,3 +164,32 @@ export default class QuestionCard extends Vue {
   }
 }
 </script>
+
+<style>
+.options {
+font-family: PP Woodland;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 150%;
+color: #FF3908;
+}
+
+.button {
+  font-family: Monument Extended;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.choose-info {
+font-family: PP Woodland;
+font-style: normal;
+font-weight: 250;
+font-size: 20px;
+line-height: 150%;
+
+text-align: center;
+color: #040233;
+}
+</style>
