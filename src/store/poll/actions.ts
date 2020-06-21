@@ -4,6 +4,8 @@ import { Question } from 'Models/Question/Question'
 import { Survey } from 'Models/Survey'
 import axios from 'axios'
 import { Group } from 'app/Models/Group'
+import { TranslatedQuestion } from 'app/Models/Question/TranslatedQuestion'
+import { TranslatedStartPage } from 'app/Models/TranslatedStartPage'
 
 function getQuestionsFromSurvey (survey: Survey): Question[] {
   return survey.groups.flatMap((g: Group) => g.questions)
@@ -17,20 +19,9 @@ export const actions: ActionTree<ProfileState, RootState> = {
       }
     })
     const questions = getQuestionsFromSurvey(response.data)
-    commit('profileLoaded', questions)
-    // fetch('https://dashboard.rate.nl/RateModules/Webservices/SurveyWebService.asmx/GetSurvey?surveyCode=' + surveyId).then(
-    //   (response) => {
-    //     if (response.ok) {
-    //       response.json<Survey>().then(survey => {
-    //         console.log(survey)
-    //         const questions: Question[] = getQuestionsFromSurvey(survey)
-    //         commit('profileLoaded', questions)
-    //       })
-    //     } else {
-    //       alert('Error HTTP: ' + response.status)
-    //     }
-    //   }
-    // )
+    console.log(response.data)
+    const startInfo = TranslatedStartPage.translateStartPage(response.data, 'nl-NL')
+    commit('profileLoaded', { startInfo, questions: questions.map((q) => TranslatedQuestion.translateQuestion(q, 'nl-NL')) })
   },
 
   addAnswer ({ commit }, answer: Record<string, string>) {

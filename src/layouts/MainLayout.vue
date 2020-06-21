@@ -1,8 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <div class="column" style="height:100vh">
-      <div class="col"></div>
-      <div class="col-8">
+      <div class="col">
         <q-carousel
           v-model="slideIndex"
           ref="carousel"
@@ -15,10 +14,12 @@
           height="100%"
           class="bg-transparent text-black"
         >
-          <q-carousel-slide :name="startSlide" class="column no-wrap flex-center">
-            <div class="q-mt-md">
-              <start-card></start-card>
+          <q-carousel-slide :name="startSlide" class="row no-wrap flex-center">
+            <div class="col"/>
+            <div class="col-xs-8 col-md-10 q-mt-md">
+              <start-card :info="startInfo" :start="carouselNext"></start-card>
             </div>
+            <div class="col"/>
           </q-carousel-slide>
           <q-carousel-slide
             v-for="(question,index) of questions"
@@ -26,7 +27,7 @@
             :key="index"
             class="column flex-center"
           >
-            <div class="q-mt-md text-center" style="min-width:50%; max-width:60%">
+            <div class="q-mt-md text-center" style="min-width:50%; max-width:60%; max-height: 100%">
               <question-card
                 ref="currentQuestion"
                 :question="question"
@@ -76,7 +77,6 @@
           </template>
         </q-carousel>
       </div>
-      <div class="col"></div>
     </div>
   </q-layout>
 </template>
@@ -88,6 +88,7 @@ import { Component, Prop, Watch } from 'vue-property-decorator'
 import QuestionCard from 'components/QuestionCard.vue'
 import StartCard from 'components/StartCard.vue'
 import { TranslatedQuestion } from '../../Models/Question/TranslatedQuestion'
+import { TranslatedStartPage } from '../../Models/TranslatedStartPage'
 
 Vue.component('question-card', QuestionCard)
 Vue.component('start-card', StartCard)
@@ -111,6 +112,9 @@ export default class MainLayout extends Vue {
 
   @Getter('answerById', { namespace })
   answerGetter: any;
+
+  @Getter('startInfo', { namespace })
+  startInfo!: TranslatedStartPage;
 
   startSlide = 0;
 
@@ -164,6 +168,7 @@ export default class MainLayout extends Vue {
   mounted () {
     console.log(this.surveyId)
     this.fetchData(this.surveyId)
+    console.log(this.startInfo)
   }
 
   handleEnd () {

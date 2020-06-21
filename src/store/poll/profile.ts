@@ -6,6 +6,7 @@ import { ProfileState, RootState } from 'Models/types'
 
 export const state: ProfileState = {
   questions: undefined,
+  startInfo: null,
   answers: {},
   language: 'nl-Nl'
 }
