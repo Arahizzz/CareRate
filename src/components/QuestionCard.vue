@@ -149,7 +149,7 @@ export default class QuestionCard extends Vue {
 
   public saveAnswer () {
     console.log('saving')
-    this.addAnswer({ [this.question.id]: { answer: this.$refs.question.answer, details: this.details, askForExplanation: this.askForExplanation } })
+    this.addAnswer({ [this.question.id]: { answer: (this.$refs.question as HTMLFormElement).answer, details: this.details, askForExplanation: this.askForExplanation } })
   }
 
   mounted () {
