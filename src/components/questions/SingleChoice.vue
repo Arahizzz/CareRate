@@ -1,6 +1,8 @@
 <template>
-<div class="q-pa-lg">
+  <div class="q-pa-lg">
+    <p class="fontsize-14 choose-info">choose one</p>
     <q-option-group
+      class="fontsize-20 options"
       v-model="answer"
       :options="getButtonLabels()"
       color="deep-orange"
@@ -20,17 +22,17 @@ export default class SingleChoice extends Vue {
   @Prop({ default: '' })
   id!: string
 
-    @Prop({ default: [] })
-    options!: TranslatedQuestionOption[]
+  @Prop({ default: [] })
+  options!: TranslatedQuestionOption[]
 
-    handleAnswer () {
-      if (this.answer) {
-        this.$emit('answered', { answer: this.answer, askForExplanation: this.options[this.answer].askForExplanation })
-      }
+  handleAnswer () {
+    if (this.answer) {
+      this.$emit('answered', { answer: this.answer, askForExplanation: this.options[this.answer].askForExplanation })
     }
+  }
 
   @Getter('answerById', { namespace })
-  answerGetter!: (id: string) => {answer: number } | undefined;
+  answerGetter!: (id: string) => { answer: number } | undefined;
 
   getButtonLabels () {
     return this.options.map((opt, index) => { return { label: opt.title, value: index } })

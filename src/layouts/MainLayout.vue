@@ -26,7 +26,7 @@
             :key="index"
             class="column flex-center"
           >
-            <div class="q-mt-md text-center" style="min-width:50%; max-width:60%; max-height: 100%">
+            <div class="q-mt-md text-center" style="min-width:50%; max-width:75%; max-height: 100%">
               <question-card
                 ref="currentQuestion"
                 :question="question"
@@ -48,7 +48,7 @@
                 color="deep-orange"
                 text-color="white"
                 icon="arrow_left"
-                size="xl"
+                size="lg"
                 @click="carouselPrevios"
               />
             </q-carousel-control>
@@ -58,7 +58,7 @@
                 color="deep-orange"
                 text-color="white"
                 icon="arrow_right"
-                size="xl"
+                size="lg"
                 @click="carouselNext"
               />
             </q-carousel-control>
@@ -175,3 +175,22 @@ export default class MainLayout extends Vue {
   }
 }
 </script>
+
+<style>
+@font-face {
+  font-family: 'PP Woodland';
+  src: url(../assets/fonts/PPWoodland-Bold.otf);
+}
+
+@font-face {
+  font-family: 'Monument Extended';
+  src: url(../assets/fonts/MonumentExtended-Regular.otf);
+}
+
+.title {
+font-family: PP Woodland;
+font-style: normal;
+font-weight: bold;
+line-height: 150%;
+}
+</style>

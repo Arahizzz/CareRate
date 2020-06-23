@@ -1,6 +1,6 @@
 <template>
   <div v-if="info != null">
-    <h2 class="title">{{info.title}}</h2>
+    <h2 class="fontsize-24 title">{{info.title}}</h2>
     <div>
       <q-img
         src="~assets/globe.png"
@@ -14,10 +14,10 @@
         </q-tooltip>
       </q-btn>
     </div>
-    <p class="description" v-if="info.description != null">{{info.description}}</p>
+    <p class="description fontsize-14" v-if="info.description != null">{{info.description}}</p>
     <div class="row">
       <q-space />
-      <q-btn flat id="start-button" label="Start" @click="start" />
+      <q-btn flat class="fontsize-36" id="start-button" label="Start" @click="start" />
     </div>
   </div>
   <div class="row justify-center" v-else>
@@ -53,35 +53,19 @@ export default class StartCard extends Vue {
 </script>
 
 <style scoped>
-.title {
-  font-family: PP Woodland;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 40px;
-  line-height: 150%;
-}
-
 .description {
-  font-family: PP Woodland;
+  font-family: "PP Woodland";
   font-style: normal;
   font-weight: 250;
-  font-size: 20px;
   line-height: 150%;
   color: #040233;
 }
 
-@media (max-width: 600px) {
-  .description {
-    font-size: 16px;
-  }
-}
-
 #start-button {
   /* title */
-  font-family: Monument Extended;
+  font-family: "Monument Extended";
   font-style: normal;
   font-weight: normal;
-  font-size: 80px;
   line-height: 50%;
 
   /* identical to box height, or 120px */

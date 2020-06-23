@@ -1,9 +1,10 @@
 <template>
   <div class="q-pa-lg">
-    <q-option-group
+    <p class="fontsize-14 choose-info">choose as many as you want</p>
+    <q-option-group class="fontsize-20 options"
       v-model="answer"
       :options="getButtonLabels()"
-      color="primary"
+      color="deep-orange"
       type="checkbox"
       @input="handleAnswer"
     />

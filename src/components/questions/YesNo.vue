@@ -1,7 +1,7 @@
 <template>
 <div class="q-pa-md q-gutter-sm">
-  <q-btn :color="answer == 'Yes' ? 'primary' : 'deep-orange'" round outline label="Yes" size="xl" @click="()=>{handleAnswer('Yes')}"/>
-  <q-btn :color="answer == 'No' ? 'primary' : 'deep-orange'" round outline label="No"  size="xl" @click="()=>{handleAnswer('No')}"/>
+  <q-btn class="options" :color="answer == 'Yes' ? 'primary' : 'deep-orange'" round outline label="Yes" size="xl" @click="()=>{handleAnswer('Yes')}"/>
+  <q-btn class="options" :color="answer == 'No' ? 'primary' : 'deep-orange'" round outline label="No"  size="xl" @click="()=>{handleAnswer('No')}"/>
 </div>
 </template>
 
