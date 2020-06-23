@@ -41,26 +41,30 @@
             </div>
           </q-carousel-slide>
 
-          <template v-slot:control>
+          <template  v-if="slideIndex>0 && windowWidth >= 800" v-slot:control>
             <q-carousel-control position="left" class="q-gutter-xs flex flex-center">
               <q-btn
                 dense
                 color="deep-orange"
                 text-color="white"
-                icon="arrow_left"
                 size="lg"
                 @click="carouselPrevios"
-              />
+                style="height:100px; border-radius:0"
+              >
+                <q-img src="~assets/arrow_left.png" style="width:100px"></q-img>
+              </q-btn>
             </q-carousel-control>
             <q-carousel-control position="right" class="q-gutter-xs flex flex-center">
               <q-btn
                 dense
                 color="deep-orange"
                 text-color="white"
-                icon="arrow_right"
                 size="lg"
+                style="height:100px; border-radius:0"
                 @click="carouselNext"
-              />
+              >
+                <q-img src="~assets/arrow_left.png" style="width:100px; transform:scaleX(-1);"></q-img>
+              </q-btn>
             </q-carousel-control>
             <q-carousel-control position="top">
               <q-slider
@@ -164,10 +168,13 @@ export default class MainLayout extends Vue {
     }
   }
 
+  windowWidth = window.innerWidth;
+
   mounted () {
-    console.log(this.surveyId)
     this.fetchData(this.surveyId)
-    console.log(this.startInfo)
+    window.addEventListener('resize', () => {
+      this.windowWidth = window.innerWidth
+    })
   }
 
   handleEnd () {
