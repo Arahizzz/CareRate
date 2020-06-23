@@ -1,6 +1,19 @@
 <template>
   <div v-if="info != null">
     <h2 class="title">{{info.title}}</h2>
+    <div>
+      <q-img
+        src="~assets/globe.png"
+        spinner-color="white"
+        style="height: 40px; max-width: 40px;"
+      />
+      <q-btn  v-for="lang in languages" flat :color="lang.cultureInfoCode===language?'blue':'deep-orange'" :key="lang.cultureInfoCode" style="height:40px; margin-left:10px" @click="()=>setLanguage(lang.cultureInfoCode)">
+        {{lang.cultureInfoCode}}
+        <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+          <strong>{{lang.description}}</strong>
+        </q-tooltip>
+      </q-btn>
+    </div>
     <p class="description" v-if="info.description != null">{{info.description}}</p>
     <div class="row">
       <q-space />
@@ -16,9 +29,21 @@
 import Vue from 'vue'
 import { Prop, Component } from 'vue-property-decorator'
 import { TranslatedStartPage } from 'Models/TranslatedStartPage'
+import { Culture } from 'Models/Culture'
+import { Action, Getter } from 'vuex-class'
 
+const namespace = 'profile'
 @Component
 export default class StartCard extends Vue {
+  @Getter('languages', { namespace })
+  languages: Culture;
+
+  @Getter('language', { namespace })
+  language: string;
+
+  @Action('setLanguage', { namespace })
+  setLanguage: any
+
   @Prop()
   info!: TranslatedStartPage | null;
 

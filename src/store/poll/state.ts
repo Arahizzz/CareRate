@@ -3,6 +3,7 @@ const state: ProfileState = {
   questions: [],
   startInfo: null,
   answers: {},
-  language: ''
+  language: '',
+  languages: null
 }
 export default state

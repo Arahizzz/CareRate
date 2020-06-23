@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import { MutationTree } from 'vuex'
 import { ProfileState } from 'Models/types'
-import { TranslatedQuestion } from 'app/Models/Question/TranslatedQuestion'
+import { Question } from 'Models/Question/Question'
 import { TranslatedStartPage } from 'app/Models/TranslatedStartPage'
+import { Culture } from 'Models/Culture'
 
 export const mutations: MutationTree<ProfileState> = {
-  profileLoaded (state, payload: {startInfo: TranslatedStartPage | null; questions: TranslatedQuestion[]}) {
+  profileLoaded (state, payload: {startInfo: TranslatedStartPage | null; questions: Question[]; languages: Culture}) {
     state.questions = payload.questions
     state.startInfo = payload.startInfo
+    state.languages = payload.languages
   },
   addAnswer (state, payload: Record<string, string | number | number[]>) {
     for (const [key, value] of Object.entries(payload)) {

@@ -4,8 +4,7 @@ import { Question } from 'Models/Question/Question'
 import { Survey } from 'Models/Survey'
 import axios from 'axios'
 import { Group } from 'app/Models/Group'
-import { TranslatedQuestion } from 'app/Models/Question/TranslatedQuestion'
-import { TranslatedStartPage } from 'app/Models/TranslatedStartPage'
+import { StartPage } from 'app/Models/TranslatedStartPage'
 
 function getQuestionsFromSurvey (survey: Survey): Question[] {
   return survey.groups.flatMap((g: Group) => g.questions)
@@ -19,9 +18,11 @@ export const actions: ActionTree<ProfileState, RootState> = {
       }
     })
     const questions = getQuestionsFromSurvey(response.data)
+    const languages = response.data.cultures
     console.log(response.data)
-    const startInfo = TranslatedStartPage.translateStartPage(response.data, 'nl-NL')
-    commit('profileLoaded', { startInfo, questions: questions.map((q) => TranslatedQuestion.translateQuestion(q, 'nl-NL')) })
+    const startInfo = new StartPage(response.data.title, response.data.description)
+    commit('profileLoaded', { startInfo, questions: questions, languages })
+    commit('setLanguage', 'nl-NL')
   },
 
   addAnswer ({ commit }, answer: Record<string, string>) {
