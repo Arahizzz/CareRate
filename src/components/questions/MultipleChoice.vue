@@ -1,13 +1,7 @@
 <template>
   <div class="q-pa-lg">
     <p class="fontsize-14 choose-info">choose as many as you want</p>
-    <q-option-group class="fontsize-20 options"
-      v-model="answer"
-      :options="getButtonLabels()"
-      color="deep-orange"
-      type="checkbox"
-      @input="handleAnswer"
-    />
+    <multi-choice :options="getButtonLabels()" v-model="answer" @input="handleAnswer" />
   </div>
 </template>
 
@@ -16,6 +10,9 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { Getter } from 'vuex-class'
 import { TranslatedQuestionOption } from '../../../Models/Question/TranslatedQuestion'
+import MultiChoiceButtonGroup from './buttonGroups/MultipleChoiceButtonGroup.vue'
+
+Vue.component('multi-choice', MultiChoiceButtonGroup)
 const namespace = 'profile'
 @Component
 export default class MultipleChoice extends Vue {
@@ -25,9 +22,9 @@ export default class MultipleChoice extends Vue {
   @Prop({ default: [] })
   options!: TranslatedQuestionOption[]
 
-  handleAnswer () {
-    const askForExplanation = this.answer.map((ans) => this.options[ans].askForExplanation).includes(true)
-    this.$emit('answered', { answer: this.answer, askForExplanation })
+  handleAnswer (answer: number[]) {
+    const askForExplanation = answer.map((ans) => this.options[ans].askForExplanation).includes(true)
+    this.$emit('answered', { answer: answer, askForExplanation })
   }
 
   @Getter('answerById', { namespace })
@@ -39,8 +36,15 @@ export default class MultipleChoice extends Vue {
 
   answer: number[] = [];
 
-  mounted () {
+  created () {
     this.answer = this.answerGetter(this.id)?.answer ?? []
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.choose-info {
+  font-family: PP Woodland;
+  font-weight: 250;
+}
+</style>

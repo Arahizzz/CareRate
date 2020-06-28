@@ -1,13 +1,7 @@
 <template>
   <div class="q-pa-lg">
     <p class="fontsize-14 choose-info">choose one</p>
-    <q-option-group
-      class="fontsize-20 options"
-      v-model="answer"
-      :options="getButtonLabels()"
-      color="deep-orange"
-      @input="handleAnswer"
-    />
+    <single-choice-buttons :options="getButtonLabels()" v-model="answer" @input="handleAnswer" />
   </div>
 </template>
 
@@ -16,32 +10,43 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { Getter } from 'vuex-class'
 import { TranslatedQuestionOption } from '../../../Models/Question/TranslatedQuestion'
+import SingleChoiceButtonGroup from './buttonGroups/SingleChoiceButtonGroup.vue'
+
+Vue.component('single-choice-buttons', SingleChoiceButtonGroup)
+
 const namespace = 'profile'
 @Component
 export default class SingleChoice extends Vue {
   @Prop({ default: '' })
   id!: string
 
-  @Prop({ default: [] })
+  @Prop({ default: () => [] })
   options!: TranslatedQuestionOption[]
 
-  handleAnswer () {
-    if (this.answer) {
-      this.$emit('answered', { answer: this.answer, askForExplanation: this.options[this.answer].askForExplanation })
-    }
+  handleAnswer (answer: number) {
+    this.$emit('answered', { answer: answer, askForExplanation: this.options[answer].askForExplanation })
   }
 
   @Getter('answerById', { namespace })
   answerGetter!: (id: string) => { answer: number } | undefined;
 
   getButtonLabels () {
+    console.log(this.options)
     return this.options.map((opt, index) => { return { label: opt.title, value: index } })
   }
 
   answer: number | null = null;
 
-  mounted () {
+  created () {
     this.answer = this.answerGetter(this.id)?.answer ?? null
+    console.log(this.getButtonLabels())
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.choose-info {
+  font-family : PP Woodland;
+  font-weight: 250;
+}
+</style>
