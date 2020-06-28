@@ -7,7 +7,7 @@ import { Group } from 'app/Models/Group'
 import { StartPage } from 'app/Models/TranslatedStartPage'
 
 function getQuestionsFromSurvey (survey: Survey): Question[] {
-  survey.groups.forEach(g=>g.questions.forEach(q => {
+  survey.groups.forEach(g => g.questions.forEach(q => {
     q.groupTitle = g.title
   }))
   return survey.groups.flatMap((g: Group) => g.questions)

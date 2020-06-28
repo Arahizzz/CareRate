@@ -36,13 +36,13 @@ const namespace = 'profile'
 @Component
 export default class StartCard extends Vue {
   @Getter('languages', { namespace })
-  languages: Culture;
+  languages!: Culture;
 
   @Getter('language', { namespace })
-  language: string;
+  language!: string;
 
   @Action('setLanguage', { namespace })
-  setLanguage: any
+  setLanguage!: (lang: string) => void;
 
   @Prop()
   info!: TranslatedStartPage | null;

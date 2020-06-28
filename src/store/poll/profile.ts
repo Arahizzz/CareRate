@@ -8,6 +8,7 @@ export const state: ProfileState = {
   questions: undefined,
   startInfo: null,
   answers: {},
+  languages: null,
   language: 'nl-Nl'
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p style="background:#EEEDFF;">{{question.groupTitle}}</p>
-    <p style="font-size:150%;font-weight:bold; margin:10px">
+    <p v-if="question.groupTitle !== null" class="fontsize-12 group-title">{{question.groupTitle}}</p>
+    <p class="fontsize-18 question-title">
       {{question.title}}
       <span v-if="question.isRequired" style="color:red">*</span>
     </p>
@@ -36,13 +36,13 @@
       ref="question"
       :id="question.id"
       :options="question.options"
-      @answered="handleMultipleAnswer"
+      @answered="handleAnswerWithoutTransition"
     ></multiple-choice>
     <slider
       v-else-if="question.questionType===7"
       ref="question"
       :id="question.id"
-      @answered="handleAnswer"
+      @answered="handleAnswerWithoutTransition"
     ></slider>
     <post-code
       v-else-if="question.questionType===11"
@@ -141,7 +141,7 @@ export default class QuestionCard extends Vue {
     }
   }
 
-  handleMultipleAnswer (answer: { askForExplanation: boolean; answer: number[] }) {
+  handleAnswerWithoutTransition (answer: { askForExplanation: boolean; answer: number[] }) {
     console.log('trigger')
     console.log(answer)
     this.askForExplanation = answer.askForExplanation
@@ -164,3 +164,19 @@ export default class QuestionCard extends Vue {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.group-title {
+  background: #EEEDFF;
+  font-family: PP Woodland;
+}
+
+.question-title {
+  font-family: PP Woodland;
+  font-size: 150%;
+  font-weight: bold;
+  margin: 10px;
+  z-index: 2;
+  background: white;
+}
+</style>

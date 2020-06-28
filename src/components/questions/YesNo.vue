@@ -30,3 +30,10 @@ export default class YesNo extends Vue {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.options {
+  font-family: PP Woodland;
+  font-weight: bold;
+}
+</style>

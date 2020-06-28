@@ -2,7 +2,7 @@
 import { RootState, ProfileState } from 'Models/types'
 import { GetterTree } from 'vuex'
 import { TranslatedQuestion } from 'app/Models/Question/TranslatedQuestion'
-import { TranslatedStartPage, StartPage } from 'app/Models/TranslatedStartPage'
+import { TranslatedStartPage } from 'app/Models/TranslatedStartPage'
 import { Culture } from 'app/Models/Culture'
 
 export const getters: GetterTree<ProfileState, RootState> = {
@@ -28,7 +28,7 @@ export const getters: GetterTree<ProfileState, RootState> = {
   language (state): string {
     return state.language
   },
-  languages (state): Culture {
+  languages (state): Culture | null {
     return state.languages
   },
   startInfo (state): TranslatedStartPage | null | undefined {

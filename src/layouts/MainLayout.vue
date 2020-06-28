@@ -14,11 +14,11 @@
           class="bg-transparent text-black"
         >
           <q-carousel-slide :name="startSlide" class="row no-wrap flex-center">
-            <div class="col"/>
+            <div class="col" />
             <div class="col-xs-8 col-md-10 q-mt-md">
               <start-card :info="startInfo" :start="carouselNext"></start-card>
             </div>
-            <div class="col"/>
+            <div class="col" />
           </q-carousel-slide>
           <q-carousel-slide
             v-for="(question,index) of questions"
@@ -26,7 +26,7 @@
             :key="index"
             class="column flex-center"
           >
-            <div class="q-mt-md text-center" style="min-width:50%; max-width:75%; max-height: 100%">
+            <div class="q-mt-md text-center" style="min-width:50%; max-width:75%; max-height: 100%; z-index: 2; background: white;">
               <question-card
                 ref="currentQuestion"
                 :question="question"
@@ -41,7 +41,7 @@
             </div>
           </q-carousel-slide>
 
-          <template  v-if="slideIndex>0 && windowWidth >= 800" v-slot:control>
+          <template v-if="slideIndex>0 && windowWidth >= 800" v-slot:control>
             <q-carousel-control position="left" class="q-gutter-xs flex flex-center">
               <q-btn
                 dense
@@ -185,19 +185,25 @@ export default class MainLayout extends Vue {
 
 <style>
 @font-face {
-  font-family: 'PP Woodland';
-  src: url(../assets/fonts/PPWoodland-Bold.otf);
+  font-family: PP Woodland;
+  src: url(../assets/fonts/PPWoodland-Ultralight.otf);
+  font-weight: normal;
 }
 
 @font-face {
-  font-family: 'Monument Extended';
+  font-family: PP Woodland;
+  src: url(../assets/fonts/PPWoodland-Bold.otf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Monument Extended";
   src: url(../assets/fonts/MonumentExtended-Regular.otf);
 }
 
 .title {
-font-family: PP Woodland;
-font-style: normal;
-font-weight: bold;
-line-height: 150%;
+  font-family: PP Woodland;
+  font-weight: bold;
+  line-height: 150%;
 }
 </style>

@@ -1,14 +1,15 @@
 <template>
-  <q-slider
+  <div class="column">
+    <p class="fontsize-36 slider-val">{{answer}}</p>
+    <q-slider
       v-model="answer"
       :min="min"
       :max="max"
       :step="1"
-       label
-      label-always
       color="deep-orange"
       @change="handleAnswer"
-  />
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -28,17 +29,24 @@ export default class Slider extends Vue {
   max!: number
 
   handleAnswer (newAnswer: number) {
-    this.answer = newAnswer
-    this.$emit('answered', this.answer)
+    this.$emit('answered', newAnswer)
   }
 
   @Getter('answerById', { namespace })
-  answerGetter!: (id: string) => {answer: number} | undefined;
+  answerGetter!: (id: string) => { answer: number } | undefined;
 
-  answer!: number;
+  answer = 0;
 
-  mounted () {
+  created () {
     this.answer = this.answerGetter(this.id)?.answer ?? this.max / 2
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.slider-val {
+  font-family: PP Woodland;
+  font-weight: bold;
+  color: $deep-orange;
+}
+</style>
