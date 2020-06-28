@@ -16,7 +16,7 @@ export class TranslatedQuestion {
   constructor (
     public id: string,
     public title: string,
-    public groupTitle: string,
+    public groupTitle: string | null,
     public description: string | null,
     public questionType: QuestionType,
     public isRequired: boolean,
@@ -40,7 +40,7 @@ export class TranslatedQuestion {
     return new TranslatedQuestion(
       q.id,
       q.title[translation],
-      q.groupTitle[translation],
+      q.groupTitle ? q.groupTitle[translation] : null,
       description,
       q.questionType,
       q.isRequired,
