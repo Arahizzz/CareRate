@@ -1,4 +1,4 @@
-# curerate (curerate)
+# CareRate (carerate)
 
 A Quasar Framework app
 
