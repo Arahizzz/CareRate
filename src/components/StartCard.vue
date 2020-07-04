@@ -14,7 +14,7 @@
         </q-tooltip>
       </q-btn>
     </div>
-    <p class="description fontsize-14" v-if="info.description != null">{{info.description}}</p>
+    <div class="description fontsize-14" v-if="info.description != null" v-html="info.description"/>
     <div class="row">
       <q-space />
       <q-btn flat class="fontsize-36" id="start-button" label="Start" @click="start" />
