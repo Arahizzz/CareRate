@@ -128,8 +128,8 @@ module.exports = configure(function (ctx) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'curerate',
-        short_name: 'curerate',
+        name: 'CareRate',
+        short_name: 'CareRate',
         description: 'A Quasar Framework app',
         display: 'standalone',
         orientation: 'portrait',
@@ -196,7 +196,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'curerate'
+        appId: 'carerate'
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration

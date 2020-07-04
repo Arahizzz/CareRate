@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "experimentalDecorators": true,
     "lib": [
-      "es2019",
+      "es2020",
       "dom"
     ]
   }
