@@ -58,6 +58,7 @@
     ></age>
 
     <q-btn
+      class="button"
       v-if="askForExplanation"
       color="primary"
       style="margin-top:10px"
@@ -67,22 +68,29 @@
     <q-dialog v-model="prompt" persistent>
       <q-card style="min-width: 350px">
         <q-card-section>
-          <div class="text-h6">Details</div>
+          <div class="text-h6" style="font-family: PP Woodland; font-weight: bold;">Details</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none">
-          <q-input dense color="black" v-model="details" autofocus @keyup.enter="prompt = false" />
+          <q-input
+            dense
+            color="primary"
+            v-model="details"
+            autofocus
+            @keyup.enter="prompt = false"
+            :input-style="{
+            'font-family': 'PP Woodland',
+            'font-style': 'normal',
+            'font-size': '20px',
+            'font-weight': '250',
+            'color': '#FF3908'
+            }"
+          />
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
-          <q-btn outline color="primary" label="Cancel" v-close-popup />
-          <q-btn
-            outline
-            color="primary"
-            label="Submit"
-            v-close-popup
-            @click="$emit('answered')"
-          />
+          <q-btn class="button" outline color="primary" label="Cancel" v-close-popup />
+          <q-btn class="button" outline color="primary" label="Submit" v-close-popup @click="$emit('answered')" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -166,7 +174,7 @@ export default class QuestionCard extends Vue {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .group-title {
   background: #EEEDFF;
   font-family: PP Woodland;
@@ -179,5 +187,10 @@ export default class QuestionCard extends Vue {
   margin: 10px;
   z-index: 2;
   background: white;
+}
+
+.button {
+  font-family: PP Woodland;
+  font-weight: bold;
 }
 </style>

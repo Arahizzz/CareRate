@@ -47,10 +47,3 @@ export default class FreeText extends Vue {
   }
 }
 </script>
-
-<style lang="stylus" scoped>
-.button {
-  font-family: PP Woodland;
-  font-weight: bold;
-}
-</style>
