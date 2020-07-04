@@ -1,4 +1,4 @@
-import { ProfileState } from 'Models/types'
+import { ProfileState } from 'src/Models/types'
 const state: ProfileState = {
   questions: [],
   startInfo: null,

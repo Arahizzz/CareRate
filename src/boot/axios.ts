@@ -7,6 +7,6 @@ declare module 'vue/types/vue' {
   }
 }
 
-export default boot(({ Vue }) => {
+export default boot(({ Vue }: {Vue: VueConstructor<Vue>}) => {
   Vue.prototype.$axios = axios
 })

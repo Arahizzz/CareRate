@@ -2,7 +2,7 @@ import { Module } from 'vuex'
 import { getters } from './getters'
 import { actions } from './actions'
 import { mutations } from './mutations'
-import { ProfileState, RootState } from 'Models/types'
+import { ProfileState, RootState } from 'src/Models/types'
 
 export const state: ProfileState = {
   questions: undefined,

@@ -28,8 +28,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Prop, Component } from 'vue-property-decorator'
-import { TranslatedStartPage } from 'Models/TranslatedStartPage'
-import { Culture } from 'Models/Culture'
+import { TranslatedStartPage } from 'src/Models/TranslatedStartPage'
+import { Culture } from 'src/Models/Culture'
 import { Action, Getter } from 'vuex-class'
 
 const namespace = 'profile'

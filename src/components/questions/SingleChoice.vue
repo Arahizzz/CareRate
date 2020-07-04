@@ -9,7 +9,7 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import { Getter } from 'vuex-class'
-import { TranslatedQuestionOption } from '../../../Models/Question/TranslatedQuestion'
+import { TranslatedQuestionOption } from 'src/Models/Question/TranslatedQuestion'
 import SingleChoiceButtonGroup from './buttonGroups/SingleChoiceButtonGroup.vue'
 
 Vue.component('single-choice-buttons', SingleChoiceButtonGroup)

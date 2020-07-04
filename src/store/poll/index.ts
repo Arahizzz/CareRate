@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex'
-import { RootState } from 'Models/types'
+import { RootState } from 'src/Models/types'
 import { profile } from './profile'
 
 Vue.use(Vuex)

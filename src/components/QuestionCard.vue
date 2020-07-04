@@ -102,7 +102,7 @@ import MultipleChoice from './questions/MultipleChoice.vue'
 import SingleChoice from './questions/SingleChoice.vue'
 import Slider from './questions/Slider.vue'
 import Age from './questions/Age.vue'
-import { TranslatedQuestion } from '../../Models/Question/TranslatedQuestion'
+import { TranslatedQuestion } from 'src/Models/Question/TranslatedQuestion'
 
 Vue.component('rating', Rating)
 Vue.component('free-text', FreeText)

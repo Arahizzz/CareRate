@@ -1,9 +1,9 @@
 // profile/getters.ts
-import { RootState, ProfileState } from 'Models/types'
+import { RootState, ProfileState } from 'src/Models/types'
 import { GetterTree } from 'vuex'
-import { TranslatedQuestion } from 'app/Models/Question/TranslatedQuestion'
-import { TranslatedStartPage } from 'app/Models/TranslatedStartPage'
-import { Culture } from 'app/Models/Culture'
+import { TranslatedQuestion } from 'src/Models/Question/TranslatedQuestion'
+import { TranslatedStartPage } from 'src/Models/TranslatedStartPage'
+import { Culture } from 'src/Models/Culture'
 
 export const getters: GetterTree<ProfileState, RootState> = {
   questions (state): TranslatedQuestion[] | undefined {

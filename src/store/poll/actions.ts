@@ -1,10 +1,10 @@
 import { ActionTree } from 'vuex'
-import { ProfileState, RootState } from 'Models/types'
-import { Question } from 'Models/Question/Question'
-import { Survey } from 'Models/Survey'
+import { ProfileState, RootState } from 'src/Models/types'
+import { Question } from 'src/Models/Question/Question'
+import { Survey } from 'src/Models/Survey'
 import axios from 'axios'
-import { Group } from 'app/Models/Group'
-import { StartPage } from 'app/Models/TranslatedStartPage'
+import { Group } from 'src/Models/Group'
+import { StartPage } from 'src/Models/TranslatedStartPage'
 
 function getQuestionsFromSurvey (survey: Survey): Question[] {
   survey.groups.forEach(g => g.questions.forEach(q => {

@@ -90,8 +90,8 @@ import { Action, Getter } from 'vuex-class'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import QuestionCard from 'components/QuestionCard.vue'
 import StartCard from 'components/StartCard.vue'
-import { TranslatedQuestion } from '../../Models/Question/TranslatedQuestion'
-import { TranslatedStartPage } from '../../Models/TranslatedStartPage'
+import { TranslatedQuestion } from 'src/Models/Question/TranslatedQuestion'
+import { TranslatedStartPage } from 'src/Models/TranslatedStartPage'
 
 Vue.component('question-card', QuestionCard)
 Vue.component('start-card', StartCard)
