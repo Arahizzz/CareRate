@@ -132,7 +132,7 @@ export default class QuestionCard extends Vue {
 
   askForExplanation: boolean | undefined = false
 
-  handleAnswer (answer: { askForExplanation: boolean; answer: string | number }) {
+  handleAnswer (answer: { askForExplanation: boolean; answer: string | number | boolean }) {
     console.log('trigger')
     console.log(answer)
     this.addAnswer({ [this.question.id]: { answer: answer.answer, details: this.details, askForExplanation: answer.askForExplanation } })
@@ -142,7 +142,7 @@ export default class QuestionCard extends Vue {
     }
   }
 
-  handleAnswerWithoutTransition (answer: { askForExplanation: boolean; answer: number[] }) {
+  handleAnswerWithoutTransition (answer: { askForExplanation: boolean; answer: number | number[] }) {
     console.log('trigger')
     console.log(answer)
     this.askForExplanation = answer.askForExplanation
