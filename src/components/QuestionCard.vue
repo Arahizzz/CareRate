@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p v-if="question.groupTitle !== null" class="fontsize-12 group-title">{{question.groupTitle}}</p>
+    <!-- <p v-if="question.groupTitle !== null" class="fontsize-12 group-title">{{question.groupTitle}}</p> -->
     <p class="fontsize-18 question-title">
       {{question.title}}
       <span v-if="question.isRequired" style="color:red">*</span>
