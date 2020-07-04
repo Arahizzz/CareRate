@@ -4,6 +4,7 @@ import { ProfileState } from 'src/Models/types'
 import { Question } from 'src/Models/Question/Question'
 import { StartPage } from 'src/Models/TranslatedStartPage'
 import { Culture } from 'src/Models/Culture'
+import { AnswerInfo } from 'src/Models/AnswerInfo'
 
 export const mutations: MutationTree<ProfileState> = {
   profileLoaded (state, payload: {startInfo: StartPage | null; questions: Question[]; languages: Culture}) {
@@ -11,7 +12,7 @@ export const mutations: MutationTree<ProfileState> = {
     state.startInfo = payload.startInfo
     state.languages = payload.languages
   },
-  addAnswer (state, payload: Record<string, string | number | number[]>) {
+  addAnswer (state, payload: Record<string, AnswerInfo>) {
     for (const [key, value] of Object.entries(payload)) {
       Vue.set(state.answers, key, value)
     }

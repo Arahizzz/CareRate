@@ -23,12 +23,12 @@ export default class FreeText extends Vue {
 
   fontSizePx = 50;
   @Getter('answerById', { namespace })
-  answerGetter: any;
+  answerGetter!: (id: string) => {answer: string} | undefined;;
 
   answer = '';
 
   mounted () {
-    this.answer = this.answerGetter(this.id)?.answer
+    this.answer = this.answerGetter(this.id)?.answer ?? ''
   }
 }
 </script>

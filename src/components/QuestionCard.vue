@@ -103,6 +103,7 @@ import SingleChoice from './questions/SingleChoice.vue'
 import Slider from './questions/Slider.vue'
 import Age from './questions/Age.vue'
 import { TranslatedQuestion } from 'src/Models/Question/TranslatedQuestion'
+import { AnswerInfo } from 'src/Models/AnswerInfo'
 
 Vue.component('rating', Rating)
 Vue.component('free-text', FreeText)
@@ -120,21 +121,21 @@ export default class QuestionCard extends Vue {
   question!: TranslatedQuestion
 
   @Getter('answerById', { namespace })
-  answerGetter: any;
+  answerGetter!: (id: string) => AnswerInfo | undefined;
 
   @Action('addAnswer', { namespace })
-  addAnswer: any
+  addAnswer!: (resp: Record<string, AnswerInfo>) => void;
 
   prompt = false
 
   details = ''
 
-  askForExplanation = false
+  askForExplanation: boolean | undefined = false
 
   handleAnswer (answer: { askForExplanation: boolean; answer: string | number }) {
     console.log('trigger')
     console.log(answer)
-    this.addAnswer({ [this.question.id]: { answer, details: this.details } })
+    this.addAnswer({ [this.question.id]: { answer: answer.answer, details: this.details, askForExplanation: answer.askForExplanation } })
     this.askForExplanation = answer.askForExplanation
     if (!this.askForExplanation) {
       this.$emit('answered')
@@ -145,7 +146,7 @@ export default class QuestionCard extends Vue {
     console.log('trigger')
     console.log(answer)
     this.askForExplanation = answer.askForExplanation
-    this.addAnswer({ [this.question.id]: { answer, details: this.details, askForExplanation: this.askForExplanation } })
+    this.addAnswer({ [this.question.id]: { answer: answer.answer, details: this.details, askForExplanation: answer.askForExplanation } })
   }
 
   public saveAnswer () {

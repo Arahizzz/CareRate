@@ -92,6 +92,7 @@ import QuestionCard from 'components/QuestionCard.vue'
 import StartCard from 'components/StartCard.vue'
 import { TranslatedQuestion } from 'src/Models/Question/TranslatedQuestion'
 import { TranslatedStartPage } from 'src/Models/TranslatedStartPage'
+import { AnswerInfo } from 'src/Models/AnswerInfo'
 
 Vue.component('question-card', QuestionCard)
 Vue.component('start-card', StartCard)
@@ -114,7 +115,7 @@ export default class MainLayout extends Vue {
   answers!: {};
 
   @Getter('answerById', { namespace })
-  answerGetter: any;
+  answerGetter!: (id: string) => AnswerInfo | undefined;;
 
   @Getter('startInfo', { namespace })
   startInfo!: TranslatedStartPage;
@@ -124,7 +125,7 @@ export default class MainLayout extends Vue {
   slideIndex = 0;
 
   @Watch('slideIndex')
-  slideIndexWatcher (value: number, oldValue: number) {
+  slideIndexWatcher () {
     try {
       (this.$refs.currentQuestion as HTMLFormElement[])[0].saveAnswer()
     } catch (error) { }
@@ -197,7 +198,7 @@ export default class MainLayout extends Vue {
 }
 
 @font-face {
-  font-family: "Monument Extended";
+  font-family: Monument Extended;
   src: url(../assets/fonts/MonumentExtended-Regular.otf);
 }
 

@@ -1,6 +1,7 @@
 import { Question } from './Question/Question'
 import { Culture } from './Culture'
 import { StartPage } from './TranslatedStartPage'
+import { AnswerInfo } from './AnswerInfo'
 export interface RootState {
   version: string;
 }
@@ -8,7 +9,7 @@ export interface RootState {
 export interface ProfileState {
   questions: Question[] | undefined;
   startInfo: StartPage | null;
-  answers: Record<string, string | number | number[]>;
+  answers: Record<string, AnswerInfo>;
   language: string;
   languages: Culture | null;
 }

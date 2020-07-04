@@ -33,17 +33,17 @@ export default class FreeText extends Vue {
     if (this.answer.length > 0) {
       this.$emit('answered', this.answer)
     } else {
-      alert("Field is empty")
+      alert('Field is empty')
     }
   }
 
   @Getter('answerById', { namespace })
-  answerGetter: any;
+  answerGetter!: (id: string) => {answer: string} | undefined;
 
   answer = '';
 
   mounted () {
-    this.answer = this.answerGetter(this.id)?.answer
+    this.answer = this.answerGetter(this.id)?.answer ?? ''
   }
 }
 </script>

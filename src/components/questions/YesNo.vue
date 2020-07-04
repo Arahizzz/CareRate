@@ -1,7 +1,7 @@
 <template>
 <div class="q-pa-md q-gutter-sm">
-  <q-btn class="options" :color="answer == 'Yes' ? 'primary' : 'deep-orange'" round outline label="Yes" size="xl" @click="()=>{handleAnswer('Yes')}"/>
-  <q-btn class="options" :color="answer == 'No' ? 'primary' : 'deep-orange'" round outline label="No"  size="xl" @click="()=>{handleAnswer('No')}"/>
+  <q-btn class="options" :color="answer === true ? 'primary' : 'deep-orange'" round outline label="Yes" size="xl" @click="()=>{handleAnswer(true)}"/>
+  <q-btn class="options" :color="answer === false ? 'primary' : 'deep-orange'" round outline label="No"  size="xl" @click="()=>{handleAnswer(false)}"/>
 </div>
 </template>
 
@@ -16,17 +16,18 @@ export default class YesNo extends Vue {
   id!: string
 
   @Getter('answerById', { namespace })
-  answerGetter: any;
+  answerGetter!: (id: string) => {answer: boolean | null} | undefined;
 
-  answer = '';
+  answer: boolean | null = null;
 
-  handleAnswer (newAnswer: string) {
+  handleAnswer (newAnswer: boolean) {
     this.$emit('answered', newAnswer)
     this.answer = newAnswer
+    console.log(this.answer)
   }
 
   mounted () {
-    this.answer = this.answerGetter(this.id)?.answer
+    this.answer = this.answerGetter(this.id)?.answer ?? null
   }
 }
 </script>

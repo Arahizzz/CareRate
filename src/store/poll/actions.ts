@@ -5,6 +5,7 @@ import { Survey } from 'src/Models/Survey'
 import axios from 'axios'
 import { Group } from 'src/Models/Group'
 import { StartPage } from 'src/Models/TranslatedStartPage'
+import { AnswerInfo } from 'src/Models/AnswerInfo'
 
 function getQuestionsFromSurvey (survey: Survey): Question[] {
   survey.groups.forEach(g => g.questions.forEach(q => {
@@ -28,7 +29,7 @@ export const actions: ActionTree<ProfileState, RootState> = {
     commit('setLanguage', 'nl-NL')
   },
 
-  addAnswer ({ commit }, answer: Record<string, string>) {
+  addAnswer ({ commit }, answer: Record<string, AnswerInfo>) {
     commit('addAnswer', answer)
   },
 

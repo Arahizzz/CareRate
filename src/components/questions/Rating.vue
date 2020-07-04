@@ -24,7 +24,7 @@ export default class Rating extends Vue {
   id!: string
 
   @Getter('answerById', { namespace })
-  answerGetter: any;
+  answerGetter!: (id: string) => {answer: string} | undefined;;
 
   answer = '';
 
@@ -34,7 +34,7 @@ export default class Rating extends Vue {
   }
 
   mounted () {
-    this.answer = this.answerGetter(this.id)?.answer
+    this.answer = this.answerGetter(this.id)?.answer ?? ''
   }
 }
 </script>

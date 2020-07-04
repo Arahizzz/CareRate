@@ -31,7 +31,6 @@ export default class SingleChoice extends Vue {
   answerGetter!: (id: string) => { answer: number } | undefined;
 
   getButtonLabels () {
-    console.log(this.options)
     return this.options.map((opt, index) => { return { label: opt.title, value: index } })
   }
 
@@ -39,7 +38,6 @@ export default class SingleChoice extends Vue {
 
   created () {
     this.answer = this.answerGetter(this.id)?.answer ?? null
-    console.log(this.getButtonLabels())
   }
 }
 </script>

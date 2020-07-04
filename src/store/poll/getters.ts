@@ -4,6 +4,7 @@ import { GetterTree } from 'vuex'
 import { TranslatedQuestion } from 'src/Models/Question/TranslatedQuestion'
 import { TranslatedStartPage } from 'src/Models/TranslatedStartPage'
 import { Culture } from 'src/Models/Culture'
+import { AnswerInfo } from 'src/Models/AnswerInfo'
 
 export const getters: GetterTree<ProfileState, RootState> = {
   questions (state): TranslatedQuestion[] | undefined {
@@ -19,10 +20,10 @@ export const getters: GetterTree<ProfileState, RootState> = {
   questionsCount (state): number {
     return state.questions?.length || 0
   },
-  answers (state): Record<string, string | number | number[]> {
+  answers (state): Record<string, AnswerInfo> {
     return state.answers
   },
-  answerById (state): (id: string) => string | number | number[] {
+  answerById (state): (id: string) => AnswerInfo | undefined {
     return (id: string) => state.answers[id]
   },
   language (state): string {
