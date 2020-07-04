@@ -6,7 +6,7 @@ export class Question {
   constructor (
     public id: string,
     public title: Record<string, string>,
-    public groupTitle: Record<string, string> | null,
+    public groupTitle: Record<string, string> | undefined,
     public description: Record<string, string> | undefined,
     public questionType: QuestionType,
     public isRequired: boolean,
