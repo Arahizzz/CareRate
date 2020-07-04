@@ -1,13 +1,14 @@
 import { route } from 'quasar/wrappers'
 import VueRouter from 'vue-router'
 import routes from './routes'
+import { VueConstructor } from 'vue'
 
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation
  */
 
-export default route(function ({ Vue }) {
+export default route(function ({ Vue }: {Vue: VueConstructor}) {
   Vue.use(VueRouter)
 
   const Router = new VueRouter({
