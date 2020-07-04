@@ -4,7 +4,7 @@
       v-model="answer"
       input-type="textarea"
       autogrow
-      color="deep-orange"
+      color="primary"
       :input-style="{
       'font-family': 'PP Woodland',
       'font-style': 'normal',
@@ -15,7 +15,7 @@
     }"
       dense
     ></q-input>
-    <q-btn class="button" style="margin-top:10px" outline color="deep-orange" @click="handleAnswer">Submit</q-btn>
+    <q-btn class="button" style="margin-top:10px" outline color="primary" @click="handleAnswer">Submit</q-btn>
   </div>
 </template>
 

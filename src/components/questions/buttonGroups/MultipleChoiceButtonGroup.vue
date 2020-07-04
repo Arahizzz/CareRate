@@ -10,7 +10,7 @@
       outline
       no-caps
     >
-      <q-icon left name="done" :color="selection[option.value]?'deep-orange':'option'" />
+      <q-icon left name="done" :color="selection[option.value]?'primary':'option'" />
       <div class="fontsize-12 option">{{option.label}}</div>
     </q-btn>
   </div>
@@ -55,6 +55,6 @@ export default class MultiChoiceButtonGroup extends Vue {
 .option {
   font-family: 'PP Woodland';
   font-weight: bold;
-  color : $deep-orange;
+  color : $primary;
 }
 </style>

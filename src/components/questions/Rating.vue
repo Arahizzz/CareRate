@@ -4,7 +4,7 @@
       class="fontsize-12 options"
       v-for="i in 10"
       :key="i"
-      :color="answer==i+''?'primary':'deep-orange'"
+      :color="answer==i+''?'accent':'primary'"
       @click="()=>{handleAnswer(i+'')}"
       round
       outline

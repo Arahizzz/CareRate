@@ -6,7 +6,7 @@
       :min="min"
       :max="max"
       :step="1"
-      color="deep-orange"
+      color="primary"
       @change="handleAnswer"
     />
   </div>
@@ -47,6 +47,6 @@ export default class Slider extends Vue {
 .slider-val {
   font-family: PP Woodland;
   font-weight: bold;
-  color: $deep-orange;
+  color: $primary;
 }
 </style>

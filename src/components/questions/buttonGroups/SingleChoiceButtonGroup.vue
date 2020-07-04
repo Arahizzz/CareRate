@@ -49,6 +49,6 @@ export default class SingleChoiceButtonGroup extends Vue {
 .option {
   font-family: 'PP Woodland Bold';
   font-weight: bold;
-  color : $deep-orange;
+  color : $primary;
 }
 </style>

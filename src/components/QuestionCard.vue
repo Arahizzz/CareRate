@@ -59,7 +59,7 @@
 
     <q-btn
       v-if="askForExplanation"
-      color="deep-orange"
+      color="primary"
       style="margin-top:10px"
       outline
       @click="prompt = true"
@@ -75,10 +75,10 @@
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
-          <q-btn outline color="deep-orange" label="Cancel" v-close-popup />
+          <q-btn outline color="primary" label="Cancel" v-close-popup />
           <q-btn
             outline
-            color="deep-orange"
+            color="primary"
             label="Submit"
             v-close-popup
             @click="$emit('answered')"

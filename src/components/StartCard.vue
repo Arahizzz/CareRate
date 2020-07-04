@@ -7,7 +7,7 @@
         spinner-color="white"
         style="height: 40px; max-width: 40px;"
       />
-      <q-btn  v-for="lang in languages" flat :color="lang.cultureInfoCode===language?'blue':'deep-orange'" :key="lang.cultureInfoCode" style="height:40px; margin-left:10px" @click="()=>setLanguage(lang.cultureInfoCode)">
+      <q-btn  v-for="lang in languages" flat :color="lang.cultureInfoCode===language?'blue':'primary'" :key="lang.cultureInfoCode" style="height:40px; margin-left:10px" @click="()=>setLanguage(lang.cultureInfoCode)">
         {{lang.cultureInfoCode}}
         <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
           <strong>{{lang.description}}</strong>
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="row justify-center" v-else>
-    <q-spinner color="deep-orange" size="3em" />
+    <q-spinner color="primary" size="3em" />
   </div>
 </template>
 

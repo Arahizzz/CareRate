@@ -1,7 +1,7 @@
 <template>
 <div class="q-pa-md q-gutter-sm">
-  <q-btn class="options" :color="answer === true ? 'primary' : 'deep-orange'" round outline label="Yes" size="xl" @click="()=>{handleAnswer(true)}"/>
-  <q-btn class="options" :color="answer === false ? 'primary' : 'deep-orange'" round outline label="No"  size="xl" @click="()=>{handleAnswer(false)}"/>
+  <q-btn class="options" :color="answer === true ? 'accent' : 'primary'" round outline label="Yes" size="xl" @click="()=>{handleAnswer(true)}"/>
+  <q-btn class="options" :color="answer === false ? 'accent' : 'primary'" round outline label="No"  size="xl" @click="()=>{handleAnswer(false)}"/>
 </div>
 </template>
 
