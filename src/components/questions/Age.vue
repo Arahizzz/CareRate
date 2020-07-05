@@ -28,7 +28,7 @@ export default class Age extends Vue {
 
   handleAnswer (newAnswer: number) {
     this.answer = newAnswer
-    this.$emit('answered', this.answer)
+    this.$emit('answered', { answer: this.answer, askForExplanation: false })
   }
 
   @Getter('answerById', { namespace })

@@ -21,9 +21,8 @@ export default class YesNo extends Vue {
   answer: boolean | null = null;
 
   handleAnswer (newAnswer: boolean) {
-    this.$emit('answered', newAnswer)
+    this.$emit('answered', { answer: newAnswer, askForExplanation: false })
     this.answer = newAnswer
-    console.log(this.answer)
   }
 
   mounted () {

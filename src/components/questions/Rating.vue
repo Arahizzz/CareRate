@@ -24,7 +24,7 @@ export default class Rating extends Vue {
   id!: string
 
   @Getter('answerById', { namespace })
-  answerGetter!: (id: string) => {answer: string} | undefined;;
+  answerGetter!: (id: string) => {answer: string} | undefined;
 
   answer = '';
 

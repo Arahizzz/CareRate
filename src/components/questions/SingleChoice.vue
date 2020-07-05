@@ -28,7 +28,7 @@ export default class SingleChoice extends Vue {
   }
 
   @Getter('answerById', { namespace })
-  answerGetter!: (id: string) => { answer: number } | undefined;
+  answerGetter!: (id: string) => { answer: number | null} | undefined;
 
   getButtonLabels () {
     return this.options.map((opt, index) => { return { label: opt.title, value: index } })

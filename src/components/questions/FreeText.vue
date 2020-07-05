@@ -31,7 +31,7 @@ export default class FreeText extends Vue {
 
   handleAnswer () {
     if (this.answer.length > 0) {
-      this.$emit('answered', this.answer)
+      this.$emit('answered', { answer: this.answer, askForExplanation: false })
     } else {
       alert('Field is empty')
     }

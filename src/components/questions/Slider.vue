@@ -29,7 +29,7 @@ export default class Slider extends Vue {
   max!: number
 
   handleAnswer (newAnswer: number) {
-    this.$emit('answered', newAnswer)
+    this.$emit('answered', { answer: newAnswer, askForExplanation: false })
   }
 
   @Getter('answerById', { namespace })

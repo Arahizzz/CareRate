@@ -8,6 +8,7 @@
     borderless
     dense
   />
+  <q-btn class="button" style="margin-top:10px" outline color="primary" @click="handleAnswer">Submit</q-btn>
 </div>
 </template>
 
@@ -23,7 +24,15 @@ export default class FreeText extends Vue {
 
   fontSizePx = 50;
   @Getter('answerById', { namespace })
-  answerGetter!: (id: string) => {answer: string} | undefined;;
+  answerGetter!: (id: string) => {answer: string} | undefined;
+
+  handleAnswer () {
+    if (this.answer.length > 0) {
+      this.$emit('answered', { answer: this.answer, askForExplanation: false })
+    } else {
+      alert('Field is empty')
+    }
+  }
 
   answer = '';
 
