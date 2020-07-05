@@ -12,10 +12,8 @@ export const mutations: MutationTree<ProfileState> = {
     state.startInfo = payload.startInfo
     state.languages = payload.languages
   },
-  addAnswer (state, payload: Record<string, AnswerInfo>) {
-    for (const [key, value] of Object.entries(payload)) {
-      Vue.set(state.answers, key, value)
-    }
+  addAnswer (state, payload: { id: string; info: AnswerInfo}) {
+    Vue.set(state.answers, payload.id, payload.info)
   },
   setLanguage (state, payload: string) {
     state.language = payload

@@ -29,7 +29,7 @@ export const actions: ActionTree<ProfileState, RootState> = {
     commit('setLanguage', 'nl-NL')
   },
 
-  addAnswer ({ commit }, answer: Record<string, AnswerInfo>) {
+  addAnswer ({ commit }, answer: { id: string; info: AnswerInfo}) {
     commit('addAnswer', answer)
   },
 

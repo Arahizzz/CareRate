@@ -132,18 +132,18 @@ export default class QuestionCard extends Vue {
   answerGetter!: (id: string) => AnswerInfo | undefined;
 
   @Action('addAnswer', { namespace })
-  addAnswer!: (resp: Record<string, AnswerInfo>) => void;
+  addAnswer!: (response: {id: string; info: AnswerInfo}) => void;
 
   prompt = false
 
   details = ''
 
-  askForExplanation: boolean | undefined = false
+  askForExplanation = false
 
   handleAnswer (answer: { askForExplanation: boolean; answer: string | number | boolean }) {
     console.log('trigger')
     console.log(answer)
-    this.addAnswer({ [this.question.id]: { answer: answer.answer, details: this.details, askForExplanation: answer.askForExplanation } })
+    this.addAnswer({ id: this.question.id, info: new AnswerInfo(answer.answer, this.details, answer.askForExplanation) })
     this.askForExplanation = answer.askForExplanation
     if (!this.askForExplanation) {
       this.$emit('answered')
@@ -154,12 +154,12 @@ export default class QuestionCard extends Vue {
     console.log('trigger')
     console.log(answer)
     this.askForExplanation = answer.askForExplanation
-    this.addAnswer({ [this.question.id]: { answer: answer.answer, details: this.details, askForExplanation: answer.askForExplanation } })
+    this.addAnswer({ id: this.question.id, info: new AnswerInfo(answer.answer, this.details, answer.askForExplanation) })
   }
 
   public saveAnswer () {
     console.log('saving')
-    this.addAnswer({ [this.question.id]: { answer: (this.$refs.question as HTMLFormElement).answer, details: this.details, askForExplanation: this.askForExplanation } })
+    this.addAnswer({ id: this.question.id, info: new AnswerInfo((this.$refs.question as HTMLFormElement).answer, this.details, this.askForExplanation) })
   }
 
   mounted () {
