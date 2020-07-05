@@ -25,8 +25,8 @@ export const actions: ActionTree<ProfileState, RootState> = {
     const languages = response.data.cultures
     console.log(response.data)
     const startInfo = new StartPage(response.data.title, response.data.description)
+    commit('setLanguage', response.data.defaultCultureCode)
     commit('profileLoaded', { startInfo, questions: questions, languages })
-    commit('setLanguage', 'nl-NL')
   },
 
   addAnswer ({ commit }, answer: { id: string; info: AnswerInfo}) {
