@@ -141,8 +141,6 @@ export default class QuestionCard extends Vue {
   askForExplanation = false
 
   handleAnswer (answer: { askForExplanation: boolean; answer: string | number | boolean }) {
-    console.log('trigger')
-    console.log(answer)
     this.addAnswer({ id: this.question.id, info: new AnswerInfo(answer.answer, this.details, answer.askForExplanation) })
     this.askForExplanation = answer.askForExplanation
     if (!this.askForExplanation) {
@@ -151,20 +149,15 @@ export default class QuestionCard extends Vue {
   }
 
   handleAnswerWithoutTransition (answer: { askForExplanation: boolean; answer: number | number[] }) {
-    console.log('trigger')
-    console.log(answer)
     this.askForExplanation = answer.askForExplanation
     this.addAnswer({ id: this.question.id, info: new AnswerInfo(answer.answer, this.details, answer.askForExplanation) })
   }
 
   public saveAnswer () {
-    console.log('saving')
     this.addAnswer({ id: this.question.id, info: new AnswerInfo((this.$refs.question as HTMLFormElement).answer, this.details, this.askForExplanation) })
   }
 
   mounted () {
-    console.log(this.question.questionType)
-    console.log(this.question.id)
     const answer = this.answerGetter(this.question.id)
     if (answer) {
       this.details = answer.details
