@@ -10,6 +10,6 @@ export interface ProfileState {
   questions: Question[] | undefined;
   startInfo: StartPage | null;
   answers: Record<string, AnswerInfo>;
-  language: string;
+  language: string | null;
   languages: Culture | null;
 }

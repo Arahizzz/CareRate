@@ -9,16 +9,13 @@ import { AnswerInfo } from 'src/Models/AnswerInfo'
 export const getters: GetterTree<ProfileState, RootState> = {
   questions (state): TranslatedQuestion[] | undefined {
     console.log(state.questions)
-    /* // test
-    state.questions?.forEach((q, i) => {
-      if (q.questionType != 7) {
-        q.isRequired = (i % 5 === 0)
-      }
-    }) */
-    return state.questions?.map(q => TranslatedQuestion.translateQuestion(q, state.language))
+    const lang = state.language
+    if (lang != null) {
+      return state.questions?.map(q => TranslatedQuestion.translateQuestion(q, lang))
+    } else return undefined
   },
   questionsCount (state): number {
-    return state.questions?.length || 0
+    return state.questions?.length ?? 0
   },
   answers (state): Record<string, AnswerInfo> {
     return state.answers
@@ -26,7 +23,7 @@ export const getters: GetterTree<ProfileState, RootState> = {
   answerById (state): (id: string) => AnswerInfo | undefined {
     return (id: string) => state.answers[id]
   },
-  language (state): string {
+  language (state): string | null {
     return state.language
   },
   languages (state): Culture | null {
@@ -34,6 +31,8 @@ export const getters: GetterTree<ProfileState, RootState> = {
   },
   startInfo (state): TranslatedStartPage | null | undefined {
     console.log(state.startInfo)
-    return state.startInfo?.translateStartPage(state.language)
+    if (state.language) {
+      return state.startInfo?.translateStartPage(state.language)
+    } else return null
   }
 }

@@ -2,15 +2,8 @@ import { Module } from 'vuex'
 import { getters } from './getters'
 import { actions } from './actions'
 import { mutations } from './mutations'
+import { state } from './state'
 import { ProfileState, RootState } from 'src/Models/types'
-
-export const state: ProfileState = {
-  questions: undefined,
-  startInfo: null,
-  answers: {},
-  languages: null,
-  language: 'nl-Nl'
-}
 
 const namespaced = true
 

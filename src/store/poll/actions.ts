@@ -8,7 +8,7 @@ import { StartPage } from 'src/Models/TranslatedStartPage'
 import { AnswerInfo } from 'src/Models/AnswerInfo'
 
 function getQuestionsFromSurvey (survey: Survey): Question[] {
-  survey.groups.forEach(g => g.questions.forEach(q => {
+  survey.groups.forEach((g: Group) => g.questions.forEach((q: Question) => {
     q.groupTitle = g.title
   }))
   return survey.groups.flatMap((g: Group) => g.questions)

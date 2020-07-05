@@ -1,9 +1,8 @@
 import { ProfileState } from 'src/Models/types'
-const state: ProfileState = {
+export const state: ProfileState = {
   questions: [],
   startInfo: null,
   answers: {},
-  language: '',
+  language: null,
   languages: null
 }
-export default state
