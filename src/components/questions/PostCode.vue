@@ -1,5 +1,5 @@
 <template>
-<div style="width:100%;display:flex; justify-content:center">
+<div class="column items-center">
   <q-input
     v-model="answer"
     mask="# # # #"
@@ -18,7 +18,7 @@ import { Component, Prop } from 'vue-property-decorator'
 import { Getter } from 'vuex-class'
 const namespace = 'profile'
 @Component
-export default class FreeText extends Vue {
+export default class PostCode extends Vue {
   @Prop({ default: '' })
   id!: string
 
